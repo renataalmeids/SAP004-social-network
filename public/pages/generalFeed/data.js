@@ -1,1 +1,3 @@
-export const example = page => `Eu estou na página ${page}`;
+export const example = page => {
+    `Eu estou na página ${page}`
+};
