@@ -1,5 +1,6 @@
 import { example } from './data.js';
 
-export const configurations = () => {
-    document.querySelector('#root').textContent = example('Configurações');
+const configurations = () => {
+  document.querySelector('#root').textContent = example('Configurações');
 };
+export { configurations };

@@ -1,5 +1,7 @@
 import { example } from './data.js';
 
-export const personalFeed = () => {
-    document.querySelector('#root').textContent = example('Feed Pessoal');
+const personalFeed = () => {
+  document.querySelector('#root').textContent = example('Feed Pessoal');
 };
+
+export { personalFeed }
