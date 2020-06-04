@@ -3,10 +3,9 @@ import { configurations } from './pages/configurations/main.js';
 import { personalFeed } from './pages/personalFeed/main.js';
 import { generalFeed } from './pages/generalFeed/main.js';
 
-// Escutar mudanças de página e direcionar o fluxo para página selecionada:
+// Mudanças de rotas e carregamento dos templates de cada rota:
 const init = () => {
   window.addEventListener('hashchange', () => {
-    // estrutura de decisão:
     switch (window.location.hash) {
       case '#login':
         home();
@@ -26,10 +25,8 @@ const init = () => {
   });
 };
 
-// Com o carregamento da página:
+// Carregamento da página:
 window.addEventListener('load', () => {
-// executar a criação do template da home:
   home();
-  // executar o 'escutador' de mudança de #:
   init();
 });
