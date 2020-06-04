@@ -2,5 +2,5 @@
 import { example } from './data.js';
 
 export const home = () => {
-    document.querySelector('#root').textContent = example('Home');
+  document.querySelector('#root').textContent = example('Home');
 };
