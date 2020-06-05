@@ -1,24 +1,26 @@
 // Aqui serão criados os eventos de Manipulação de DOM e templates
-import { greeting } from './data.js';
+import { registro } from './data.js';
+
 
 export const home = () => {
   const container = document.createElement('div');
 
   container.innerHTML = `
     <form>
-      <input id='name' type='text'>
-      <button id='greeting-btn'>Dizer Oi</button>
+      <input id='email' type='text'>
+      <input id='senha' type='text'>
+      <button id='registro'>registre-se</button>
     </form>
     <div id='greeting-message'></div>
   `;
 
-  const name = container.querySelector('#name');
-  const greetingBtn = container.querySelector('#greeting-btn');
-  const greetingMessage = container.querySelector('#greeting-message');
+  const email = container.querySelector('#email');
+  const senha = container.querySelector('#senha');
+  const registroBtn = container.querySelector('#registro');
 
-  greetingBtn.addEventListener('click', (event) => {
+  registroBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    greetingMessage.innerHTML = greeting(name.value);
+    registro (email.value, senha.value)
   });
 
   return container;
