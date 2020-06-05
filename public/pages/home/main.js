@@ -3,6 +3,7 @@
 
 export const home = () => {
   const main = document.getElementById('root');
+  main.innerHTML = '';
   const containerLogin = document.createElement('div');
   containerLogin.innerHTML = `
   <h2>Rainbow</h2>
