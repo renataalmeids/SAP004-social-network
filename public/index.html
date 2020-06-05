@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <div id="root"></div>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rainbow</title>
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li><a href="/#login">Home - Login</a></li>
+        <li> <a href="/#personalFeed">Feed Pessoal</a></li>
+        <li><a href="/#generalFeed">Feed Geral</a></li>
+        <li><a href="/#configurations">Configurações</a></li>
+      </ul>
+    </header>
+    <main id="root"></main>
+    <footer></footer>
   <script type="module" src="index.js"></script>
-</body>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="config.js"></script>
+  </body>
 </html>
