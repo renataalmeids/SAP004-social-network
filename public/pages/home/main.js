@@ -1,64 +1,29 @@
-import { example } from './data.js';
+export const home = () => {
 
-// Variáveis globais:
-const main = document.querySelector('#root');
+  // Esconder cabeçalho da página
+  document.getElementsByTagName('header')[0].style.display = 'none';
 
-const createTags = (tag) => document.createElement(tag);
-const appendTags = (parentNode, childNode) => parentNode.appendChild(childNode);
+  // Template
+  const main = document.getElementById('root');
+  main.innerHTML = '';
+  const containerLogin = document.createElement('div');
+  containerLogin.setAttribute('class', 'box');
+  containerLogin.innerHTML = `
+  <div class='box-item'><h1>RAINBOW</h1>
+  <img src='../../assets/logo_small.jpg' alt='Logotype' class='icon-large'>
+  <h3>Seja bem-vinde!</h3>
+  </div><br>
 
-
-// Criar elementos da página:
-const createElementsPage = () => {
-  // lista de tags utilizadas
-  const tagsTypes = ['div', 'img', 'p', 'form', 'input', 'button'];
-
-  const pageContainer = createTags(tagsTypes[0]);
-  const logotypeContainer = createTags(tagsTypes[0]);
-  const btnAreaContainer = createTags(tagsTypes[0]);
-  const logotypeIcon = createTags(tagsTypes[1]);
-  const googleIcon = createTags(tagsTypes[1]);
-  const registerText = createTags(tagsTypes[2]);
-  const logotypeText = createTags(tagsTypes[2]);
-  const form = createTags(tagsTypes[3]);
-  const emailInput = createTags(tagsTypes[4]);
-  const passwordInput = createTags(tagsTypes[4]);
-  const loginBtn = createTags(tagsTypes[5]);
-  const googleBtn = createTags(tagsTypes[5]);
-
-  appendTags(main, pageContainer);
-  // Elementos da logo
-  appendTags(logotypeContainer, logotypeIcon);
-  appendTags(logotypeContainer, logotypeText);
-  appendTags(pageContainer, logotypeContainer);
-  // Elementos do form
-  appendTags(form, emailInput);
-  appendTags(form, passwordInput);
-  appendTags(pageContainer, form);
-  // Botões
-  appendTags(btnAreaContainer, loginBtn);
-  appendTags(btnAreaContainer, googleBtn);
-  appendTags(btnAreaContainer, googleIcon);
-  appendTags(btnAreaContainer, registerText);
-  appendTags(pageContainer, btnAreaContainer);
+  <div class='box-item'>
+  <form method='post'>
+  <input type='email' placeholder='e-mail' id='emailArea' class='loginArea'><br>
+  <input type='password' placeholder='senha' id='passwordArea' class='loginArea'><br><br>
+  <button class='buttonArea btn'>Entrar</button>
+  <p>ou</p>
+  <button  class='buttonArea btn'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
+    <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
+  </form>
+  </div>
+  `;
+  return main.appendChild(containerLogin);
 };
-
-
-const setStyleOnElements = () => {
-  document.getElementsByTagName('p')[0].textContent = 'Seja bem-vinde!';
-  document.getElementsByTagName('p')[1].innerHTML = `Se não tem uma conta, <a href="
-  https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp"> registre-se! </a>`;
-  document.getElementsByTagName('input')[0].placeholder = 'E-mail';
-  document.getElementsByTagName('input')[1].placeholder = 'Senha';
-  document.getElementsByTagName('button')[0].innerHTML = 'Entrar';
-  document.getElementsByTagName('button')[1].innerHTML = 'Acesse com';
-
-
-};
-
-const home = () => {
-  // Executar funções
-  createElementsPage();
-  setStyleOnElements();
-};
-
-export { home };
