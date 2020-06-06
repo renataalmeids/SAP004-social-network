@@ -29,7 +29,6 @@ const init = () => {
   });
 };
 
-// Carregamento da página:
 window.addEventListener('load', () => {
   home();
   init();
