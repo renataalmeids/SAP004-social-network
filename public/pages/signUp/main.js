@@ -9,9 +9,10 @@ export const signUp = () => {
   containerSignUp.innerHTML = `
   <div class='box-item'><h1>RAINBOW</h1>
   <img src='../../assets/logo_small.jpg' alt='Logotype' class='icon-large'>
-  <h3>Seja bem-vinde!</h3>
+  
   </div><br>
   <div class='box-item'>
+  <h3>Seja bem-vinde!</h3>
   <form method='post'>
   <input type="text" placeholder="Insira seu nome" id="user-name" class='loginArea'><br>
   <input type="email" placeholder="Insira um e-mail" id="register-email" class="loginArea"><br>
@@ -29,7 +30,6 @@ export const signUp = () => {
     event.preventDefault();
     register(inputEmail.value, inputPassword.value);
   };
-
   newRegister.addEventListener('click', newUser);
   return main.appendChild(containerSignUp);
 };
