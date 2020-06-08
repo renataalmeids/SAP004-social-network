@@ -1,5 +1,4 @@
 export const home = () => {
-
   // Esconder cabeçalho da página
   document.getElementsByTagName('header')[0].style.display = 'none';
 
