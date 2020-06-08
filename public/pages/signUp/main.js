@@ -22,15 +22,15 @@ export const signUp = () => {
   </div>
   `;
 
+  const newRegister = containerSignUp.getElementById('button-register');
+  const inputEmail = containerSignUp.getElementById('register-email').value;
+  const inputPassword = containerSignUp.getElementById('register-passwrd').value;
+
+  const newUser = () => {
+    register(inputEmail, inputPassword);
+  };
+
+  newRegister.addEventListener('click', newUser);
+
   return main.appendChild(containerSignUp);
 };
-
-const newRegister = document.getElementById('button-register');
-const inputEmail = document.getElementById('register-email').value;
-const inputPassword = document.getElementById('register-passwrd').value;
-
-function newUser() {
-  return signUp(register(inputEmail, inputPassword));
-}
-
-newRegister.addEventListener('click', newUser());
