@@ -64,10 +64,17 @@ input::placeholder {
   font-size: 0.8em;
 }
 
+.slogan-desktop {
+  display: none;
+}
+
 
 /*Responsividade: versão laptop*/
 
 @media only screen and (min-width: 1024px) {
+  .slogan-desktop {
+    display: block;
+  }
   .box {
     flex-direction: row;
     height: 600px;
@@ -91,3 +98,4 @@ input::placeholder {
   .box {
     height: 716px;
   }
+}
