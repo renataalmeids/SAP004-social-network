@@ -1,3 +1,6 @@
+// Página de login
+import { signIn } from './data.js';
+
 export const home = () => {
   // Esconder cabeçalho da página
   document.getElementsByTagName('header')[0].style.display = 'none';
@@ -17,12 +20,18 @@ export const home = () => {
   <form method='post'>
   <input type='email' placeholder='e-mail' id='emailArea' class='loginArea'><br>
   <input type='password' placeholder='senha' id='passwordArea' class='loginArea'><br><br>
-  <button class='buttonArea btn'>Entrar</button>
+  <button class='buttonArea btn signIn'>Entrar</button>
   <p>ou</p>
   <button  class='buttonArea btn'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
-    <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
+  <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
   </form>
   </div>
   `;
+
+  containerLogin.querySelector('.signIn').addEventListener('click', (event) => {
+    event.preventDefault();
+    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value);
+  });
+
   return main.appendChild(containerLogin);
 };
