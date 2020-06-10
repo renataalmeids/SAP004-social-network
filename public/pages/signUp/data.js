@@ -5,8 +5,6 @@ export const register = (email, password) => firebase
     window.location.hash = ('#login');
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
+    let errorCode = error.code;
+    let errorMessage = error.message;
   });
