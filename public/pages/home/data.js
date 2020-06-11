@@ -1,6 +1,3 @@
-import { generalFeed } from '../generalFeed/main.js';
-
-
 export const signIn = (email, password) => {
   firebase
     .auth()
@@ -16,15 +13,16 @@ export const signIn = (email, password) => {
 };
 
 // signIn com Google
-export const signInWithGoogle = (email, password) => {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      generalFeed();
-    })
-    .catch((error) => {
-      console.error(error.code);
-      console.error(error.message);
+export const loginWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      const token = result.credential.accessToken;
+      const user = result.user;
+    }).catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = error.credential;
     });
 };
