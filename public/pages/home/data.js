@@ -1,6 +1,3 @@
-// import { generalFeed } from '../generalFeed/main.js';
-
-
 export const signIn = (email, password) => {
   firebase
     .auth()
