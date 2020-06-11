@@ -5,9 +5,48 @@ export const generalFeed = () => {
 
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
-  <p>Bem-vinde ao feed geral da nossa rede social!</p>
-  <br><br>
-  <button class='btn signOut'>Sair</button>
+  <div class='boxFeed'>
+    <header>
+    <nav class='navbar'>
+        <figure>
+            <img class='icon-circle icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+        </figure>
+        <div>
+        <button class='circle yellow'>
+        <img class='icon-circle' src='../../assets/settings.png'>
+        </button>
+        <button class='circle signOut orange'> 
+        <img class='icon-circle' src='../../assets/logout.png'>
+        </button>
+        </div>
+      </nav>
+    </header>
+    
+    <section class='profileArea'>
+      <figure>
+        <img class='photo'>
+      </figure>
+  
+      <div class='name-profileArea'>
+        <h3>Fulane da Silva Sauro
+        </h3>
+        <h5>Descrição</h5>
+      </div>
+    </section>
+
+    <section class='shareArea'>
+      <textarea placeholder='O que você quer compartilhar?'></textarea>
+
+      <div class='shareArea-buttons'>
+        <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+        <button class='btn btn-small  purple'>Publicar</button>      
+      </div> 
+    </section>
+
+    <section
+    class='publishedTextArea'>
+    </section>
+'</div>
   `;
 
   containerFeed.querySelector('.signOut').addEventListener('click', (event) => {
