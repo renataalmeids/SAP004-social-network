@@ -121,14 +121,14 @@ textarea::placeholder {
   margin-top: 2px;
 }
 
-.profileArea,
-.shareArea {
+.profile-area,
+.share-area {
   display: flex;
   align-items: center;
   padding: 15px 30px;
 }
 
-.name-profileArea {
+.name-profile-area {
   width: 100%;
   text-align: center;
 }
@@ -140,27 +140,30 @@ textarea::placeholder {
   background-color: black;
 }
 
-.shareArea,
-.shareArea textarea {
+.share-area,
+.post-area,
+.share-area textarea {
   padding: 10px;
   margin: 10px 30px;
   border: 1px solid lightgrey;
   border-radius: 5px;
 }
 
-.shareArea {
+.share-area,
+.post-area {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
-.shareArea textarea {
+.share-area textarea {
   margin: 0px;
   width: 100%;
   height: 80px;
   margin-bottom: 15px;
 }
 
-.shareArea-buttons {
+.share-area-buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
