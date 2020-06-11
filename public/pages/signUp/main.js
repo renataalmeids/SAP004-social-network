@@ -25,6 +25,7 @@ export const signUp = () => {
   const newRegister = containerSignUp.querySelector('#button-register');
   const inputEmail = containerSignUp.querySelector('#register-email');
   const inputPassword = containerSignUp.querySelector('#register-password');
+
   const newUser = (event) => {
     event.preventDefault();
     register(inputEmail.value, inputPassword.value);
