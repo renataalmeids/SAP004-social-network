@@ -29,8 +29,9 @@ export const home = () => {
   `;
 
   const googleButton = containerLogin.querySelector('.btnGoogle');
+  const signInButton = containerLogin.querySelector('.signIn');
 
-  containerLogin.querySelector('.signIn').addEventListener('click', (event) => {
+  signInButton.addEventListener('click', (event) => {
     event.preventDefault();
     signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value);
   });
@@ -38,5 +39,6 @@ export const home = () => {
   googleButton.addEventListener('click', () => {
     loginWithGoogle();
   });
+
   return main.appendChild(containerLogin);
 };
