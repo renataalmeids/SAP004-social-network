@@ -24,14 +24,18 @@ export const home = () => {
   <p>ou</p>
   <button  class='buttonArea btn'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
   <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
+  <p id='error'></p>
   </form>
   </div>
   `;
 
   containerLogin.querySelector('.signIn').addEventListener('click', (event) => {
     event.preventDefault();
-    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value);
-  });
-
-  return main.appendChild(containerLogin);
-};
+    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value)
+    .then((result) => {
+      console.log (result)
+      return containerLogin.querySelector('#error').innerHTML = result
+      });
+    });  
+    return main.appendChild(containerLogin);
+  };

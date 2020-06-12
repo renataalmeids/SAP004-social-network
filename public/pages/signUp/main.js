@@ -20,17 +20,18 @@ export const signUp = () => {
   <button class="btn buttonArea" id="button-register">Cadastrar</button>
   <p>ou</p>
   <button class="btn buttonArea">Cadastrar com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button>
+  <p id='error'></p>
   </form>
   </div>
   `;
+  
   const newRegister = containerSignUp.querySelector('#button-register');
   const inputEmail = containerSignUp.querySelector('#register-email');
   const inputPassword = containerSignUp.querySelector('#register-password');
-
   const newUser = (event) => {
     event.preventDefault();
     register(inputEmail.value, inputPassword.value);
   };
   newRegister.addEventListener('click', newUser);
-  return main.appendChild(containerSignUp);
+  return main.appendChild(containerSignUp)
 };

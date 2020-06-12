@@ -2,7 +2,7 @@ import { generalFeed } from '../generalFeed/main.js';
 
 
 export const signIn = (email, password) => {
-  firebase
+  return firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
@@ -10,8 +10,13 @@ export const signIn = (email, password) => {
       console.log(result);
     })
     .catch((error) => {
-      console.log(error.code);
-      console.log(error.message);
+      const errorCode = error.code;
+      console.log(error)  
+      if(errorCode ==='auth/user-not-found'){
+        return 'usuário não encontrado'
+        }else if(errorCode === 'auth/wrong-password'){
+          return 'senha inválida'
+      }
     });
 };
 
