@@ -1,4 +1,4 @@
-import { register } from './data';
+import { register } from './data.js';
 
 export const signUp = () => {
   const main = document.getElementById('root');

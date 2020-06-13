@@ -7,4 +7,6 @@ export const register = (email, password) => firebase
   .catch((error) => {
     let errorCode = error.code;
     let errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
   });
