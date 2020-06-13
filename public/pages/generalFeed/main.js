@@ -1,4 +1,4 @@
-/* import { logOut } from './data.js';
+import { logOut } from './data.js';
 
 export const generalFeed = () => {
   document.querySelector('#root').innerHTML = '';
@@ -53,4 +53,3 @@ export const generalFeed = () => {
 
   return document.querySelector('#root').appendChild(containerFeed);
 };
- */
