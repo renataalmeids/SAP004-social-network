@@ -1,5 +1,3 @@
-// Página de Registro (SignUp)
-
 export const register = (email, password) => firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)

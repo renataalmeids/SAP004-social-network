@@ -1,7 +1,7 @@
-import { logOut } from './data.js';
+/* import { logOut } from './data.js';
 
 export const generalFeed = () => {
-  document.querySelector('#root').innerHTML = "";
+  document.querySelector('#root').innerHTML = '';
 
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
@@ -15,13 +15,12 @@ export const generalFeed = () => {
             <button class='circle yellow'>
             <img class='icon-circle' src='../../assets/settings.png'>
             </button>
-            <button class='circle signOut orange'> 
+            <button class='circle signOut orange'>
             <img class='icon-circle' src='../../assets/logout.png'>
             </button>
           </div>
         </nav>
     </header>
-    
     <section class='profile-area'>
       <figure>
         <img class='photo'>
@@ -36,9 +35,9 @@ export const generalFeed = () => {
     <section class='share-area'>
       <textarea placeholder='O que você quer compartilhar?'></textarea>
       <div class='share-area-buttons'>
-        <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
-        <button class='btn btn-small  purple'>Publicar</button>    
-      </div> 
+      <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+        <button class='btn btn-small  purple'>Publicar</button>
+      </div>
     </section>
 
     <section class='post-area'>
@@ -53,4 +52,5 @@ export const generalFeed = () => {
   });
 
   return document.querySelector('#root').appendChild(containerFeed);
-}
+};
+ */
