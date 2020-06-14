@@ -1,0 +1,5 @@
+export const errorCodes = {
+  'auth/weak-password': 'Ops, sua senha é muito curta! Use mais de 6 caracteres.',
+  'auth/invalid-email': 'Parece que seu e-mail é inválido. Tente novamente.',
+  DEFAULT_MESSAGE: 'Ocorreu algum erro. Tente novamente.',
+};

@@ -20,11 +20,11 @@ export const home = () => {
   <form method='post'>
   <input type='email' placeholder='e-mail' id='emailArea' class='loginArea'><br>
   <input type='password' placeholder='senha' id='passwordArea' class='loginArea'><br><br>
-  </form>
   <button class='buttonArea btn signIn'>Entrar</button>
   <p>ou</p>
   <button class='buttonArea btn btnGoogle'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
   <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
+  </form>
   </div>
   `;
 
