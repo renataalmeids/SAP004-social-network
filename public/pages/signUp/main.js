@@ -1,5 +1,5 @@
 import { register } from './data.js';
-import { errorCodes } from './constants.js';
+import { errorCodes } from '../constants.js';
 
 export const signUp = () => {
   const main = document.getElementById('root');
@@ -18,7 +18,7 @@ export const signUp = () => {
   <input type="text" placeholder="Insira seu nome" id="user-name" class='loginArea'><br>
   <input type="email" placeholder="Insira um e-mail" id="register-email" class="loginArea"><br>
   <input type="password" placeholder="Insira uma senha" id="register-password" class="loginArea"><br><br>
-  <div id="singup-error"></div>
+  <div class="error-message" id="singup-error"></div>
   <button class="btn buttonArea" id="button-register">Cadastrar</button>
   </form>
   </div>
