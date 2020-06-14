@@ -89,7 +89,7 @@ textarea::placeholder {
   border-radius: 20px;
 }
 
-#singup-error {
+.error-message {
   color: #e8504b;
   padding-bottom: 5px;
 }

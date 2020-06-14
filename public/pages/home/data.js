@@ -1,4 +1,4 @@
-export const signIn = (email, password) => {
+export const signIn = (email, password, mexirica) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
@@ -6,7 +6,7 @@ export const signIn = (email, password) => {
       window.location.hash = '#generalFeed';
       return result;
     })
-    .catch(error => error);
+    .catch(error => mexirica(error));
 };
 
 export const loginWithGoogle = () => {
