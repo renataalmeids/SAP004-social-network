@@ -1,14 +1,20 @@
+<<<<<<< HEAD
 import { generalFeed } from '../generalFeed/main.js';
 
 
 export const signIn = (email, password) => {
   return firebase
+=======
+export const signIn = (email, password, mexirica) => {
+  firebase
+>>>>>>> 441ce91e7147d42b425ad2a3dff8b837849bef3e
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
       window.location.hash = '#generalFeed';
-      console.log(result);
+      return result;
     })
+<<<<<<< HEAD
     .catch((error) => {
       const errorCode = error.code;
       console.log(error)  
@@ -18,18 +24,16 @@ export const signIn = (email, password) => {
           return 'senha inválida'
       }
     });
+=======
+    .catch(error => mexirica(error));
+>>>>>>> 441ce91e7147d42b425ad2a3dff8b837849bef3e
 };
 
-// signIn com Google
-export const signInWithGoogle = (email, password) => {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      generalFeed();
-    })
-    .catch((error) => {
-      console.error(error.code);
-      console.error(error.message);
-    });
+export const loginWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      window.location.hash = '#generalFeed';
+      return result;
+    }).catch(error => error);
 };

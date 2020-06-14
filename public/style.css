@@ -1,13 +1,28 @@
-/*
-Paleta de cores: 
-vermelho (#e8504b)
-laranja (#e9ae4a) - não usar!
-amarelo (#fef34b),
-verde (#49a562)
-azul (#4880f7)
-roxo (#9a55a6)
-branco (#ffffff);
-*/
+/*Paleta de cores*/
+
+.red {
+  background-color: #e8504b;
+}
+
+.orange {
+  background-color: #e9ae4a;
+}
+
+.yellow {
+  background-color: #fef34b;
+}
+
+.green {
+  background-color: #49a562;
+}
+
+.purple {
+  background-color: #4880f7;
+}
+
+.violet {
+  background-color: #9a55a6;
+}
 
 * {
   padding: 0px;
@@ -17,7 +32,8 @@ branco (#ffffff);
 
 body,
 button,
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   font-family: 'Nova Slim', cursive;
 }
 
@@ -38,13 +54,26 @@ input::placeholder {
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
 }
 
+.btn-small {
+  width: 100px;
+  padding: 2px;
+  color: white;
+  font-weight: bold;
+}
+
 .buttonArea {
   margin: 8px auto;
+  background-color: #9a55a6;
+  color: white;
 }
 
 .icon-large {
   width: 220px;
   height: 150px;
+}
+
+.font-small {
+  font-size: 0.8em;
 }
 
 .google-icon {
@@ -60,8 +89,9 @@ input::placeholder {
   border-radius: 20px;
 }
 
-.font-small {
-  font-size: 0.8em;
+.error-message {
+  color: #e8504b;
+  padding-bottom: 5px;
 }
 
 .slogan-desktop {
@@ -69,7 +99,89 @@ input::placeholder {
 }
 
 
+/*Feed Geral*/
+
+.navbar {
+  border-bottom: 2px solid #4880f7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 30px;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 15px;
+}
+
+.icon-logo {
+  border-radius: 0px;
+}
+
+.icon-circle {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.profile-area,
+.share-area {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.name-profile-area {
+  width: 100%;
+  text-align: center;
+}
+
+.photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: black;
+}
+
+.share-area,
+.post-area,
+.share-area textarea {
+  padding: 10px;
+  margin: 10px 30px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.share-area,
+.post-area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.share-area textarea {
+  margin: 0px;
+  width: 100%;
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+.share-area-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
 /*Responsividade: versão laptop*/
+
+
+/*Tela de login*/
 
 @media only screen and (min-width: 1024px) {
   .slogan-desktop {
@@ -99,3 +211,6 @@ input::placeholder {
     height: 716px;
   }
 }
+
+
+/*Feed geral*/
