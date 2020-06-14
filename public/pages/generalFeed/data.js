@@ -1,6 +1,4 @@
-import { createPostTemplate } from './main.js'
-
-const db = firebase.firestore();
+import { loadPostTemplate, clearPostArea } from './main.js'
 
 export const logOut = () => {
   firebase
@@ -16,7 +14,9 @@ export const logOut = () => {
 };
 
 export const createPost = (text) => {
-  db.collection('posts')
+  firebase
+    .firestore()
+    .collection('posts')
     .add({
       user: `${firebase.auth().currentUser.email}`,
       text: `${text}`,
@@ -24,7 +24,7 @@ export const createPost = (text) => {
       likes: 0,
     })
     .then((doc) => {
-      console.log(doc.id);
+      console.log('Document written with ID: ', doc.id);
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
@@ -32,14 +32,15 @@ export const createPost = (text) => {
 };
 
 export const readPost = () => {
-  db.collection('posts')
+  firebase
+    .firestore()
+    .collection('posts')
     .onSnapshot((snapshot) => {
       const postList = [];
-      snapshot.forEach((doc) => postList.push(doc.data().text));
+      snapshot.forEach(doc => postList.push(doc.data().text));
 
-      // colocar isso dentro de uma função do main e executar aqui:
-      console.log(postList);
-      document.querySelector('#post-area').innerHTML = '';
-      postList.forEach(post => createPostTemplate(post));
+      // Carregar postagem no documento
+      clearPostArea();
+      postList.forEach(post => loadPostTemplate(post));
     });
 };

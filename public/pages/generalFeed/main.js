@@ -7,13 +7,16 @@ const setLogOutOnButton = () => {
   });
 };
 
-const getInfosToPublish = () => {
-  document.querySelector('#publish-btn').addEventListener('click', () => {
-    createPost(document.querySelector('#postText').value);
-  });
+const getTextToPublish = () => {
+  document.querySelector('#publish-btn').addEventListener('click', () => createPost(document.querySelector('#postText').value));
 };
 
-export const createPostTemplate = (text) => {
+export const clearPostArea = () => {
+  document.querySelector('#post-area').innerHTML = '';
+};
+
+
+export const loadPostTemplate = (text) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `${text}`;
   postBox.classList.add('post-area');
@@ -21,8 +24,7 @@ export const createPostTemplate = (text) => {
 };
 
 export const generalFeed = () => {
-  // Criação do template
-  document.querySelector('#root').innerHTML = "";
+  document.querySelector('#root').innerHTML = '';
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
   <div class='boxFeed'>
@@ -67,6 +69,6 @@ export const generalFeed = () => {
 
   // Chamada das funções
   setLogOutOnButton();
-  getInfosToPublish();
+  getTextToPublish();
   readPost();
 };
