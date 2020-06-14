@@ -1,4 +1,5 @@
 import { register } from './data.js';
+import { errorCodes } from './constants.js';
 
 export const signUp = () => {
   const main = document.getElementById('root');
@@ -25,10 +26,19 @@ export const signUp = () => {
   const newRegister = containerSignUp.querySelector('#button-register');
   const inputEmail = containerSignUp.querySelector('#register-email');
   const inputPassword = containerSignUp.querySelector('#register-password');
+  const inputError = containerSignUp.querySelector('#singup-error');
+
+  const onError = (error) => {
+    if (errorCodes[error.code]) {
+      inputError.innerHTML = errorCodes[error.code];
+    } else {
+      inputError.innerHTML = errorCodes.DEFAULT_MESSAGE;
+    }
+  };
 
   const newUser = (event) => {
     event.preventDefault();
-    register(inputEmail.value, inputPassword.value);
+    return register(inputEmail.value, inputPassword.value, onError);
   };
   newRegister.addEventListener('click', newUser);
   return main.appendChild(containerSignUp);
