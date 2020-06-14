@@ -7,7 +7,6 @@ export const signIn = (email, password) => {
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
       window.location.hash = '#generalFeed';
-      console.log(result);
     })
     .catch((error) => {
       console.log(error.code);
