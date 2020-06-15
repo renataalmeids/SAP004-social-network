@@ -29,7 +29,8 @@ export const loadPostTemplate = (user, data, text) => {
   <div>${data}</div></header>
   <div>${text}</div>
   <footer class='footer-post-box'>
-  <div>Curtidas</div><div>Comentários</div>  
+  <div>Curtidas</div><div>Comentários</div>
+  <div>Editar</div><div>Excluir</div>
   </footer>
   `;
   postBox.classList.add('post-area');

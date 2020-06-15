@@ -45,6 +45,5 @@ export const readPost = () => {
       snapshot.forEach((doc) => {
         loadPostTemplate(doc.data().user, doc.data().data, doc.data().text);
       });
-      // Carregar postagem no documento
     });
 };
