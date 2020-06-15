@@ -1,5 +1,6 @@
 // Página de login
-import { signIn } from './data.js';
+import { signIn, loginWithGoogle } from './data.js';
+import { errorCodes } from '../constants.js';
 
 export const home = () => {
   // Esconder cabeçalho da página
@@ -13,24 +14,41 @@ export const home = () => {
   containerLogin.innerHTML = `
   <div class='box-item'><h1>RAINBOW</h1>
   <img src='../../assets/logo_small.jpg' alt='Logotype' class='icon-large'>
-  <h3 class='slogan-desktop'>Slogan da rede social...</h3>
+  <h3 class='slogan-desktop'>A rede social da comunidade LGBTQI+</h3>
   </div><br>
   <div class='box-item'>
   <h3>Seja bem-vinde!</h3>
   <form method='post'>
   <input type='email' placeholder='e-mail' id='emailArea' class='loginArea'><br>
   <input type='password' placeholder='senha' id='passwordArea' class='loginArea'><br><br>
+  </form>
+  <div class="inerror-message" id="error-login"></div>
   <button class='buttonArea btn signIn'>Entrar</button>
   <p>ou</p>
-  <button  class='buttonArea btn'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
+  <button class='buttonArea btn btnGoogle'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
   <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
-  </form>
   </div>
   `;
 
-  containerLogin.querySelector('.signIn').addEventListener('click', (event) => {
+  const googleButton = containerLogin.querySelector('.btnGoogle');
+  const signInButton = containerLogin.querySelector('.signIn');
+  const errorLogin = containerLogin.querySelector('#error-login');
+
+  const inError = (error) => {
+    if (errorCodes[error.code]) {
+      errorLogin.innerHTML = errorCodes[error.code];
+    } else {
+      errorLogin.innerHTML = errorCodes.DEFAULT_MESSAGE;
+    }
+  };
+
+  signInButton.addEventListener('click', (event) => {
     event.preventDefault();
-    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value);
+    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value, inError);
+  });
+
+  googleButton.addEventListener('click', () => {
+    loginWithGoogle();
   });
 
   return main.appendChild(containerLogin);

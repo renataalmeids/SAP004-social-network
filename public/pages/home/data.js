@@ -1,29 +1,21 @@
 import { generalFeed } from '../generalFeed/main.js';
 
-
-export const signIn = (email, password) => {
+export const signIn = (email, password, inError) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
       window.location.hash = '#generalFeed';
+      return result;
     })
-    .catch((error) => {
-      console.log(error.code);
-      console.log(error.message);
-    });
+    .catch(error => inError(error));
 };
 
-// signIn com Google
-export const signInWithGoogle = (email, password) => {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      generalFeed();
-    })
-    .catch((error) => {
-      console.error(error.code);
-      console.error(error.message);
-    });
+export const loginWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      window.location.hash = '#generalFeed';
+      return result;
+    }).catch(error => error);
 };
