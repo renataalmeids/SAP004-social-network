@@ -20,7 +20,6 @@ export const clearPostArea = () => {
   document.querySelector('#post-area').innerHTML = '';
 };
 
-
 export const loadPostTemplate = (user, data, text) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `
