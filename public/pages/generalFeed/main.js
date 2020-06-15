@@ -28,8 +28,10 @@ export const loadPostTemplate = (user, data, text) => {
   <div>${data}</div></header>
   <div>${text}</div>
   <footer class='footer-post-box'>
-  <div>Curtidas</div><div>Comentários</div>
-  <div>Editar</div><div>Excluir</div>
+  <div>Curtidas</div>
+  <div>Comentários</div>
+  <div><button class='edit-btn'>Editar<buttton></div>
+  <div>Excluir</div>
   </footer>
   `;
   postBox.classList.add('post-area');
@@ -37,6 +39,8 @@ export const loadPostTemplate = (user, data, text) => {
 };
 
 export const generalFeed = () => {
+  // Criar elementos gerais da página
+  // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
   document.querySelector('#root').innerHTML = '';
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
@@ -75,7 +79,7 @@ export const generalFeed = () => {
     </section>
 
     <section id='post-area'>
-      </section>
+    </section>
   </div>
   `;
   document.querySelector('#root').appendChild(containerFeed);

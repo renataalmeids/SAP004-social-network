@@ -47,3 +47,11 @@ export const readPost = () => {
       });
     });
 };
+
+export const editPost = () => {
+  // recuperar o id do doc dentro do próprio template
+  // add eventListener no botao editar
+  // para reconhecer o elemento clicado e recuperar o id, usar o event.target
+  // sobrescrever postagem com
+  // método update do db
+}
