@@ -89,7 +89,8 @@ textarea::placeholder {
   border-radius: 20px;
 }
 
-.error-message {
+.error-message,
+.inerror-message {
   color: #e8504b;
   padding-bottom: 5px;
 }
