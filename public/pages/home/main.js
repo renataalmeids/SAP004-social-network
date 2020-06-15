@@ -22,7 +22,7 @@ export const home = () => {
   <input type='email' placeholder='e-mail' id='emailArea' class='loginArea'><br>
   <input type='password' placeholder='senha' id='passwordArea' class='loginArea'><br><br>
   </form>
-  <div id="error-login"></div>
+  <div class="inerror-message" id="error-login"></div>
   <button class='buttonArea btn signIn'>Entrar</button>
   <p>ou</p>
   <button class='buttonArea btn btnGoogle'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
@@ -34,7 +34,7 @@ export const home = () => {
   const signInButton = containerLogin.querySelector('.signIn');
   const errorLogin = containerLogin.querySelector('#error-login');
 
-  const mexirica = (error) => {
+  const inError = (error) => {
     if (errorCodes[error.code]) {
       errorLogin.innerHTML = errorCodes[error.code];
     } else {
@@ -44,7 +44,7 @@ export const home = () => {
 
   signInButton.addEventListener('click', (event) => {
     event.preventDefault();
-    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value, mexirica);
+    signIn(containerLogin.querySelector('#emailArea').value, containerLogin.querySelector('#passwordArea').value, inError);
   });
 
   googleButton.addEventListener('click', () => {

@@ -1,4 +1,6 @@
-export const signIn = (email, password, mexirica) => {
+import { generalFeed } from '../generalFeed/main.js';
+
+export const signIn = (email, password, inError) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
@@ -6,7 +8,7 @@ export const signIn = (email, password, mexirica) => {
       window.location.hash = '#generalFeed';
       return result;
     })
-    .catch(error => mexirica(error));
+    .catch(error => inError(error));
 };
 
 export const loginWithGoogle = () => {
