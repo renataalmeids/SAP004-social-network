@@ -170,11 +170,25 @@ textarea::placeholder {
   margin-bottom: 15px;
 }
 
-.share-area-buttons {
+.share-area-buttons,
+.title-post-box,
+.footer-post-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.post-area {
+  padding: 0px;
+}
+
+.title-post-box {
+  background-color: lightgray;
+}
+
+.footer-post-box {
+  border-top: 1px solid lightgray;
 }
 
 
