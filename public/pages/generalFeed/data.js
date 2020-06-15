@@ -1,5 +1,11 @@
 import { loadPostTemplate, clearPostArea } from './main.js'
 
+// Data da publicação:
+const getData = () => {
+  const data = new Date();
+  return data.toLocaleDateString();
+};
+
 export const logOut = () => {
   firebase
     .auth()
@@ -20,8 +26,7 @@ export const createPost = (text) => {
     .add({
       user: `${firebase.auth().currentUser.email}`,
       text: `${text}`,
-      data: '18/02/2020',
-      likes: 0,
+      data: getData(),
     })
     .then((doc) => {
       console.log('Document written with ID: ', doc.id);
@@ -36,11 +41,10 @@ export const readPost = () => {
     .firestore()
     .collection('posts')
     .onSnapshot((snapshot) => {
-      const postList = [];
-      snapshot.forEach(doc => postList.push(doc.data().text));
-
-      // Carregar postagem no documento
       clearPostArea();
-      postList.forEach(post => loadPostTemplate(post));
+      snapshot.forEach((doc) => {
+        loadPostTemplate(doc.data().user, doc.data().data, doc.data().text);
+      });
+      // Carregar postagem no documento
     });
 };

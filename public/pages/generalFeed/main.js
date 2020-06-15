@@ -1,5 +1,10 @@
 import { logOut, createPost, readPost } from './data.js';
 
+// Declaração das funções chamadas dentro de generalFeed()
+// generalFeed() é a função chamada quando entra nesta #hash
+// Please, não mudar a ordem das funções por causa da precedência de execução! =)
+
+
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -16,9 +21,17 @@ export const clearPostArea = () => {
 };
 
 
-export const loadPostTemplate = (text) => {
+export const loadPostTemplate = (user, data, text) => {
   const postBox = document.createElement('div');
-  postBox.innerHTML = `${text}`;
+  postBox.innerHTML = `
+  <header class='title-post-box'>
+  <div>${user}</div>
+  <div>${data}</div></header>
+  <div>${text}</div>
+  <footer class='footer-post-box'>
+  <div>Curtidas</div><div>Comentários</div>  
+  </footer>
+  `;
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
 };
