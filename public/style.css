@@ -47,7 +47,7 @@ textarea::placeholder {
 }
 
 .btn {
-  border: solid #4880f7;
+  border: solid #9a55a6;
   width: 150px;
   border-radius: 20px;
   padding: 5px;
@@ -63,6 +63,8 @@ textarea::placeholder {
 
 .buttonArea {
   margin: 8px auto;
+  background-color: #9a55a6;
+  color: white;
 }
 
 .icon-large {
@@ -85,6 +87,11 @@ textarea::placeholder {
   padding: 5px 5px 5px 10px;
   border: solid #fef34b;
   border-radius: 20px;
+}
+
+.error-message {
+  color: #e8504b;
+  padding-bottom: 5px;
 }
 
 .slogan-desktop {

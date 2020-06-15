@@ -1,14 +1,7 @@
-// Página de Registro (SignUp)
-
-export const register = (email, password) => firebase
+export const register = (email, password, onError) => firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
   .then(() => {
     window.location.hash = ('#login');
   })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
-  });
+  .catch(error => onError(error));

@@ -4,7 +4,6 @@ import { logOut, createPost, readPost } from './data.js';
 // generalFeed() é a função chamada quando entra nesta #hash
 // Please, não mudar a ordem das funções por causa da precedência de execução! =)
 
-
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -50,7 +49,7 @@ export const generalFeed = () => {
             <button class='circle yellow'>
             <img class='icon-circle' src='../../assets/settings.png'>
             </button>
-            <button class='circle signOut orange'> 
+            <button class='circle signOut orange'>
             <img class='icon-circle' src='../../assets/logout.png'>
             </button>
           </div>
@@ -72,6 +71,7 @@ export const generalFeed = () => {
         <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
         <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
       </div> 
+
     </section>
 
     <section id='post-area'>
