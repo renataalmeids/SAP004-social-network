@@ -1,4 +1,4 @@
-import { logOut, createPost, readPost } from './data.js';
+import { logOut, createPost, readPost, deletePost } from './data.js';
 
 // Declaração das funções chamadas dentro de generalFeed()
 // generalFeed() é a função chamada quando entra nesta #hash
@@ -19,19 +19,29 @@ export const clearPostArea = () => {
   document.querySelector('#post-area').innerHTML = '';
 };
 
-export const loadPostTemplate = (user, data, text) => {
+const deleteEvent = (postBox, code) => {
+  console.log(code)
+  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`)
+  deleteBtn.addEventListener('click',() => deletePost(code))
+}
+
+export const loadPostTemplate = (code, user, data, text) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `
+  <data value=${code}></data>
   <header class='title-post-box'>
   <div>${user}</div>
   <div>${data}</div></header>
-  <div>${text}</div>
+  <div><input type=text value=${text}></div>
   <footer class='footer-post-box'>
-  <div>Curtidas</div><div>Comentários</div>
-  <div>Editar</div><div>Excluir</div>
+  <div>Curtidas</div>
+  <div>Comentários</div>
+  <div><button value=${code} class='edit-btn'>Editar<buttton></div>
+  <div><button class='delete-btn' data-id='${code}' >Excluir</button></div> 
   </footer>
   `;
   postBox.classList.add('post-area');
+  deleteEvent(postBox, code);
   document.querySelector('#post-area').appendChild(postBox);
 };
 

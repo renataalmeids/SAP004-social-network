@@ -43,7 +43,15 @@ export const readPost = () => {
     .onSnapshot((snapshot) => {
       clearPostArea();
       snapshot.forEach((doc) => {
-        loadPostTemplate(doc.data().user, doc.data().data, doc.data().text);
+        loadPostTemplate(doc.id, doc.data().user, doc.data().data, doc.data().text);
       });
+    });
+};
+
+export const deletePost = (id) => {
+  firebase.firestore().collection('posts').doc(id).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
     });
 };
