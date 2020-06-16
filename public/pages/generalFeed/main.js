@@ -1,8 +1,5 @@
-import { logOut, createPost, readPost } from './data.js';
+import { logOut, createPost, readPost, editPost } from './data.js';
 
-// Declaração das funções chamadas dentro de generalFeed()
-// generalFeed() é a função chamada quando entra nesta #hash
-// Please, não mudar a ordem das funções por causa da precedência de execução! =)
 
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -19,13 +16,26 @@ export const clearPostArea = () => {
   document.querySelector('#post-area').innerHTML = '';
 };
 
-export const loadPostTemplate = (user, data, text) => {
+// Declaração das funções de edição dos posts
+// Chamadas dentro de loadPostTemplate
+const removeDisableOfInput = element => element.removeAttribute('disabled');
+const showToSaveBtn = (element, className) => element.classList.remove(className);
+const getValuesToNewPost = (listener, newText, postID) => listener.addEventListener('click', () => {
+  editPost(newText.value, postID.value);
+});
+
+// Inseri tag data com código único de cada post. Essa tag não é renderizada na tela.
+// Tb passei o id como valor do botão edit, para facilitar a recuperação ao clicar sobre ele
+export const loadPostTemplate = (code, user, data, text) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `
+  <data value=${code}></data>
   <header class='title-post-box'>
-  <div>${user}</div>
+   <div>${user}</div>
   <div>${data}</div></header>
-  <div>${text}</div>
+  <div>
+  <input class='text' type=text value=${text} disabled><button type='button' class='save-btn display-none'>Salvar</button>
+  </div>
   <footer class='footer-post-box'>
   <div>Curtidas</div>
   <div>Comentários</div>
@@ -35,6 +45,13 @@ export const loadPostTemplate = (user, data, text) => {
   `;
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
+
+  // Programando manipuação dos elementos do template na edição das postagens:
+  postBox.querySelector('.edit-btn').addEventListener('click', () => {
+    removeDisableOfInput(postBox.querySelector('.text'));
+    showToSaveBtn(postBox.querySelector('.save-btn'), 'display-none');
+    getValuesToNewPost(postBox.querySelector('.save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
+  });
 };
 
 export const generalFeed = () => {
@@ -75,9 +92,7 @@ export const generalFeed = () => {
         <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
         <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
       </div> 
-
     </section>
-
     <section id='post-area'>
     </section>
   </div>

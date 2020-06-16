@@ -19,13 +19,13 @@ export const logOut = () => {
     });
 };
 
-export const createPost = (text) => {
+export const createPost = (postText) => {
   firebase
     .firestore()
     .collection('posts')
     .add({
       user: `${firebase.auth().currentUser.email}`,
-      text: `${text}`,
+      text: postText,
       data: getData(),
     })
     .then((doc) => {
@@ -43,15 +43,29 @@ export const readPost = () => {
     .onSnapshot((snapshot) => {
       clearPostArea();
       snapshot.forEach((doc) => {
-        loadPostTemplate(doc.data().user, doc.data().data, doc.data().text);
+        loadPostTemplate(doc.id, doc.data().user, doc.data().data, doc.data().text);
       });
     });
 };
 
-export const editPost = () => {
-  // recuperar o id do doc dentro do próprio template
-  // add eventListener no botao editar
-  // para reconhecer o elemento clicado e recuperar o id, usar o event.target
-  // sobrescrever postagem com
-  // método update do db
-}
+export const editPost = (newText, postID) => {
+  console.log(postID);
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID).update({ text: newText })
+    .then(() => console.log('Postagem editada com sucesso'))
+    .catch(() => console.log('Ops!Postagem não editada'));
+};
+
+// recuperar o id do doc dentro do próprio template-OK
+//uOScu6n7I1rV6LFnn0PA
+// add eventListener no botao editar
+
+// para reconhecer o elemento clicado e recuperar o id, usar o event.target
+
+// o texto do post aparece dentro do input
+
+// sobrescrever postagem com
+
+// método update do db
