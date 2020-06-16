@@ -40,7 +40,6 @@ export const readPost = (callback) => {
     .collection('posts')
     .onSnapshot((snapshot) => {
       const post = [];
-
       snapshot.forEach((doc) => {
         const { user, data, text } = doc.data();
         post.push({
