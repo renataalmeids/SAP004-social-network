@@ -57,15 +57,3 @@ export const editPost = (newText, postID) => {
     .then(() => console.log('Postagem editada com sucesso'))
     .catch(() => console.log('Ops!Postagem não editada'));
 };
-
-// recuperar o id do doc dentro do próprio template-OK
-//uOScu6n7I1rV6LFnn0PA
-// add eventListener no botao editar
-
-// para reconhecer o elemento clicado e recuperar o id, usar o event.target
-
-// o texto do post aparece dentro do input
-
-// sobrescrever postagem com
-
-// método update do db
