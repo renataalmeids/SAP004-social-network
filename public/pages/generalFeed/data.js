@@ -1,5 +1,3 @@
-import { loadPostTemplate, clearPostArea } from './main.js';
-
 // Data da publicação:
 const getData = () => {
   const data = new Date();
@@ -36,15 +34,23 @@ export const createPost = (postText) => {
     });
 };
 
-export const readPost = () => {
+export const readPost = (callback) => {
   firebase
     .firestore()
     .collection('posts')
     .onSnapshot((snapshot) => {
-      clearPostArea();
+      const post = [];
+
       snapshot.forEach((doc) => {
-        loadPostTemplate(doc.id, doc.data().user, doc.data().data, doc.data().text);
+        const { user, data, text } = doc.data();
+        post.push({
+          user,
+          data,
+          text,
+          code: doc.id
+        });
       });
+      callback(post);
     });
 };
 
