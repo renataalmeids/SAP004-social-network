@@ -1,4 +1,4 @@
-import { loadPostTemplate, clearPostArea } from './main.js'
+import { loadPostTemplate, clearPostArea } from './main.js';
 
 // Data da publicação:
 const getData = () => {
@@ -55,5 +55,19 @@ export const editPost = (newText, postID) => {
     .collection('posts')
     .doc(postID).update({ text: newText })
     .then(() => console.log('Postagem editada com sucesso'))
+    .catch(() => console.log('Ops!Postagem não editada'));
+};
+
+export const getOriginalPostById = (postID) => {
+  // console.log ('estou recuperando')
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .get()
+    .then((doc) => {
+      console.log(doc.data().text);
+      return doc.data().text;
+    })
     .catch(() => console.log('Ops!Postagem não editada'));
 };

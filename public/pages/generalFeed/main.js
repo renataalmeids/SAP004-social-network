@@ -1,4 +1,4 @@
-import { logOut, createPost, readPost, editPost } from './data.js';
+import { logOut, createPost, readPost, editPost, getOriginalPostById } from './data.js';
 
 
 // Funções chamadas na criação do template da página (function generalFeed())
@@ -69,8 +69,11 @@ export const generalFeed = () => {
 };
 
 // Função de edição das postagens chamadas na criação de cada post individual (function loadPostTemplate)
-const getValuesToNewPost = (listener, newText, postID) => listener.addEventListener('click', () => {
+const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
+});
+const discartChanges = (listener, postID) => listener.addEventListener('click', () => {
+  getOriginalPostById(postID.value);
 });
 
 // Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
@@ -79,16 +82,18 @@ export const loadPostTemplate = (code, user, data, text) => {
   postBox.innerHTML = `
   <data value=${code}></data>
   <header class='title-post-box'>
-   <div>${user}</div>
-  <div>${data}</div></header>
-  <div>
-  <input class='text' type=text value=${text} disabled><button type='button' class='save-btn display-none'>Salvar</button>
+    <div>${user}</div><div>${data}</div>
+  </header>
+  <input class='text' type=text value=${text} disabled>
+  <div class='save-btn-area display-none''>
+    <button class='edit-save-btn' type='button'>Salvar</button>
+    <button class='edit-cancel-btn' type='button'>Cancelar</button>
   </div>
   <footer class='footer-post-box'>
-  <div>Curtidas</div>
-  <div>Comentários</div>
-  <div><button class='edit-btn'>Editar<buttton></div>
-  <div>Excluir</div>
+    <div>Curtidas</div>
+    <div>Comentários</div>
+    <div><button class='edit-btn'>Editar<buttton></div>
+    <div>Excluir</div>
   </footer>
   `;
   postBox.classList.add('post-area');
@@ -97,7 +102,8 @@ export const loadPostTemplate = (code, user, data, text) => {
   // Programando manipulação dos elementos do template na edição das postagens:
   postBox.querySelector('.edit-btn').addEventListener('click', () => {
     postBox.querySelector('.text').removeAttribute('disabled');
-    postBox.querySelector('.save-btn').classList.remove('display-none');
-    getValuesToNewPost(postBox.querySelector('.save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
+    postBox.querySelector('.save-btn-area').classList.remove('display-none');
+    getValuesFromEditedPost(postBox.querySelector('.edit-save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
+    discartChanges(postBox.querySelector('.edit-cancel-btn'), postBox.getElementsByTagName('data')[0]);
   });
 };
