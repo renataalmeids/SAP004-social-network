@@ -90,7 +90,9 @@ const discartChanges = (listener, postID) => listener.addEventListener('click', 
 
 
 // Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
-const loadPostTemplate = ({ code, user, data, text }) => {
+const loadPostTemplate = ({
+  code, user, data, text,
+}) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
@@ -117,6 +119,5 @@ const loadPostTemplate = ({ code, user, data, text }) => {
     postBox.querySelector('.text').removeAttribute('disabled');
     postBox.querySelector('.save-btn-area').classList.remove('display-none');
     getValuesFromEditedPost(postBox.querySelector('.edit-save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
-    discartChanges(postBox.querySelector('.edit-cancel-btn'), postBox.getElementsByTagName('data')[0]);
   });
 };
