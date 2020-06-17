@@ -1,9 +1,13 @@
-import { logOut, createPost, readPost } from './data.js';
+import {
+  logOut,
+  createPost,
+  readPost,
+  editPost,
+  getOriginalPostById,
+} from './data.js';
 
-// Declaração das funções chamadas dentro de generalFeed()
-// generalFeed() é a função chamada quando entra nesta #hash
-// Please, não mudar a ordem das funções por causa da precedência de execução! =)
 
+// Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -15,27 +19,18 @@ const getTextToPublish = () => {
   document.querySelector('#publish-btn').addEventListener('click', () => createPost(document.querySelector('#postText').value));
 };
 
-export const clearPostArea = () => {
+const clearPostArea = () => {
   document.querySelector('#post-area').innerHTML = '';
 };
 
-export const loadPostTemplate = (user, data, text) => {
-  const postBox = document.createElement('div');
-  postBox.innerHTML = `
-  <header class='title-post-box'>
-  <div>${user}</div>
-  <div>${data}</div></header>
-  <div>${text}</div>
-  <footer class='footer-post-box'>
-  <div>Curtidas</div><div>Comentários</div>
-  <div>Editar</div><div>Excluir</div>
-  </footer>
-  `;
-  postBox.classList.add('post-area');
-  document.querySelector('#post-area').appendChild(postBox);
+const resetPost = (postList) => {
+  clearPostArea();
+  postList.forEach(loadPostTemplate);
 };
 
 export const generalFeed = () => {
+  // Criar elementos gerais da página
+  // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
   document.querySelector('#root').innerHTML = '';
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
@@ -73,9 +68,7 @@ export const generalFeed = () => {
         <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
         <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
       </div> 
-
     </section>
-
     <section id='post-area' class='posts-container'>
       </section>
     </div>
@@ -87,5 +80,47 @@ export const generalFeed = () => {
   // Chamada das funções
   setLogOutOnButton();
   getTextToPublish();
-  readPost();
+  readPost(resetPost);
+};
+
+// Função de edição das postagens chamadas na criação de dos posts individuais
+//  (function loadPostTemplate)
+const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
+  editPost(newText.value, postID.value);
+});
+const discartChanges = (listener, postID) => listener.addEventListener('click', () => {
+  getOriginalPostById(postID.value);
+});
+
+
+// Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
+const loadPostTemplate = ({ code, user, data, text }) => {
+  const postBox = document.createElement('div');
+  postBox.innerHTML = `
+  <data value=${code}></data>
+  <header class='title-post-box'>
+    <div>${user}</div><div>${data}</div>
+  </header>
+  <input disabled class='text' type='text' value='${text}'>
+  <div class='save-btn-area display-none''>
+    <button class='edit-save-btn' type='button'>Salvar</button>
+    <button class='edit-cancel-btn' type='button'>Cancelar</button>
+  </div>
+  <footer class='footer-post-box'>
+    <div>Curtidas</div>
+    <div>Comentários</div>
+    <div><button class='edit-btn'>Editar<buttton></div>
+    <div>Excluir</div>
+  </footer>
+  `;
+  postBox.classList.add('post-area');
+  document.querySelector('#post-area').appendChild(postBox);
+
+  // Programando manipulação dos elementos do template na edição das postagens:
+  postBox.querySelector('.edit-btn').addEventListener('click', () => {
+    postBox.querySelector('.text').removeAttribute('disabled');
+    postBox.querySelector('.save-btn-area').classList.remove('display-none');
+    getValuesFromEditedPost(postBox.querySelector('.edit-save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
+    discartChanges(postBox.querySelector('.edit-cancel-btn'), postBox.getElementsByTagName('data')[0]);
+  });
 };
