@@ -1,5 +1,3 @@
-import { loadPostTemplate, clearPostArea } from './main.js'
-
 // Data da publicação:
 const getData = () => {
   const data = new Date();
@@ -19,13 +17,13 @@ export const logOut = () => {
     });
 };
 
-export const createPost = (text) => {
+export const createPost = (postText) => {
   firebase
     .firestore()
     .collection('posts')
     .add({
       user: `${firebase.auth().currentUser.email}`,
-      text: `${text}`,
+      text: postText,
       data: getData(),
     })
     .then((doc) => {
@@ -36,17 +34,35 @@ export const createPost = (text) => {
     });
 };
 
-export const readPost = () => {
+export const readPost = (callback) => {
   firebase
     .firestore()
     .collection('posts')
     .onSnapshot((snapshot) => {
-      clearPostArea();
+      const post = [];
       snapshot.forEach((doc) => {
-        loadPostTemplate(doc.id, doc.data().user, doc.data().data, doc.data().text);
+        const { user, data, text } = doc.data();
+        post.push({
+          user,
+          data,
+          text,
+          code: doc.id
+        });
       });
+      callback(post);
     });
 };
+
+export const editPost = (newText, postID) => {
+  console.log(postID);
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID).update({ text: newText })
+    .then(() => console.log('Postagem editada com sucesso'))
+    .catch(() => console.log('Ops!Postagem não editada'));
+};
+
 
 export const deletePost = (id) => {
   firebase.firestore().collection('posts').doc(id).delete().then(function() {
