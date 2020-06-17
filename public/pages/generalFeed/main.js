@@ -1,9 +1,5 @@
 import {
-  logOut,
-  createPost,
-  readPost,
-  editPost,
-  getOriginalPostById,
+  logOut, createPost, readPost, editPost,
 } from './data.js';
 
 
@@ -34,22 +30,23 @@ export const generalFeed = () => {
   document.querySelector('#root').innerHTML = '';
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
+  <div class='general-container'>
+  <header>
+  <nav class='navbar'>
+      <figure>
+          <img class='icon-circle icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+      </figure>
+      <div>
+        <button class='circle yellow'>
+        <img class='icon-circle' src='../../assets/settings.png'>
+        </button>
+        <button class='circle signOut orange'>
+        <img class='icon-circle' src='../../assets/logout.png'>
+        </button>
+      </div>
+    </nav>
+  </header>
   <div class='boxFeed'>
-    <header>
-      <nav class='navbar'>
-          <figure>
-              <img class='icon-circle icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-          </figure>
-          <div>
-            <button class='circle yellow'>
-            <img class='icon-circle' src='../../assets/settings.png'>
-            </button>
-            <button class='circle signOut orange'>
-            <img class='icon-circle' src='../../assets/logout.png'>
-            </button>
-          </div>
-        </nav>
-    </header>
     <section class='profile-area'>
       <figure>
         <img class='photo'>
@@ -60,6 +57,7 @@ export const generalFeed = () => {
         <h5>Descrição</h5>
       </div>
     </section>
+    <div class='share-and-post'>
     <section class='share-area'>
       <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
       <div class='share-area-buttons'>
@@ -67,8 +65,10 @@ export const generalFeed = () => {
         <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
       </div> 
     </section>
-    <section id='post-area'>
-    </section>
+    <section id='post-area' class='posts-container'>
+      </section>
+    </div>
+  </div>
   </div>
   `;
   document.querySelector('#root').appendChild(containerFeed);
@@ -84,10 +84,6 @@ export const generalFeed = () => {
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
 });
-const discartChanges = (listener, postID) => listener.addEventListener('click', () => {
-  getOriginalPostById(postID.value);
-});
-
 
 // Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
 const loadPostTemplate = ({
