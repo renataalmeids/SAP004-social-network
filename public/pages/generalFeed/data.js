@@ -1,9 +1,9 @@
-import { loadPostTemplate, clearPostArea } from './main.js'
+import { loadPostTemplate, clearPostArea } from './main.js';
 
 // Data da publicação:
 const getData = () => {
   const data = new Date();
-  return data.toLocaleDateString();
+  return data.toLocaleString();
 };
 
 export const logOut = () => {
@@ -13,10 +13,7 @@ export const logOut = () => {
     .then(() => {
       window.location.hash = '#login';
     })
-    .catch((error) => {
-      console.log(error.code);
-      console.log(error.message);
-    });
+    .catch(error => error);
 };
 
 export const createPost = (text) => {
@@ -40,6 +37,7 @@ export const readPost = () => {
   firebase
     .firestore()
     .collection('posts')
+    .orderBy('data', 'desc')
     .onSnapshot((snapshot) => {
       clearPostArea();
       snapshot.forEach((doc) => {
