@@ -85,39 +85,6 @@ export const generalFeed = () => {
   readPost(resetPost);
 };
 
-// // Função de edição das postagens chamadas na criação de dos posts individuais
-// //  (function loadPostTemplate)
-// const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
-//   editPost(newText.value, postID.value);
-// });
-
-// export const loadPostTemplate = (code, user, data, text) => {
-//   const postBox = document.createElement('div');
-//   postBox.innerHTML = `
-//   <data value=${code}></data>
-//   <header class='title-post-box'>
-//   <div>${user}</div>
-//   <div>${data}</div></header>
-//   <div><input type=text value=${text}></div>
-//   <footer class='footer-post-box'>
-//   <div>Curtidas</div>
-//   <div>Comentários</div>
-//   <div><button value=${code} class='edit-btn'>Editar<buttton></div>
-//   <div><button class='delete-btn' data-id='${code}'>Excluir</button></div> 
-//   </footer>
-//   `;
-
-  //deleteEvent(postBox, code);
-//  // Funçes da ediço dos posts
-//   postBox.classList.add('post-area');
-//    document.querySelector('#post-area').appendChild(postBox);
-//   postBox.querySelector('.edit-btn').addEventListener('click', () => {
-//     postBox.querySelector('.text').removeAttribute('disabled');
-//     postBox.querySelector('.save-btn-area').classList.remove('display-none');
-//     getValuesFromEditedPost(postBox.querySelector('.edit-save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
-// });
-// };
-
 // Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
 const loadPostTemplate = ({
   code, 
