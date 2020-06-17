@@ -2,7 +2,6 @@ import {
   logOut, createPost, readPost, editPost,
 } from './data.js';
 
-
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -52,8 +51,7 @@ export const generalFeed = () => {
         <img class='photo'>
       </figure>
       <div class='name-profile-area'>
-        <h3>Fulane da Silva Sauro
-        </h3>
+        <h3>${firebase.auth().currentUser.displayName}</h3>
         <h5>Descrição</h5>
       </div>
     </section>

@@ -23,6 +23,8 @@ export const signUp = () => {
   </form>
   </div>
   `;
+
+  const getName = containerSignUp.querySelector('#username');
   const newRegister = containerSignUp.querySelector('#button-register');
   const inputEmail = containerSignUp.querySelector('#register-email');
   const inputPassword = containerSignUp.querySelector('#register-password');
@@ -38,7 +40,7 @@ export const signUp = () => {
 
   const newUser = (event) => {
     event.preventDefault();
-    return register(inputEmail.value, inputPassword.value, onError);
+    return register(getName.value, inputEmail.value, inputPassword.value, onError);
   };
   newRegister.addEventListener('click', newUser);
   return main.appendChild(containerSignUp);
