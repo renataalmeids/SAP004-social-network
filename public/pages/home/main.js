@@ -19,13 +19,13 @@ export const home = () => {
   <div class='box-item'>
   <h3>Seja bem-vinde!</h3>
   <form method='post'>
-  <input type='email' placeholder='e-mail' id='emailArea' class='loginArea'><br>
-  <input type='password' placeholder='senha' id='passwordArea' class='loginArea'><br><br>
+  <input type='email' placeholder='e-mail' id='emailArea' class='login-area'><br>
+  <input type='password' placeholder='senha' id='passwordArea' class='login-area'><br><br>
   </form>
   <div class="inerror-message" id="error-login"></div>
-  <button class='buttonArea btn signIn'>Entrar</button>
+  <button class='button-area btn signIn'>Entrar</button>
   <p>ou</p>
-  <button class='buttonArea btn btnGoogle'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
+  <button class='button-area btn btnGoogle'>Acesse com <img src='../../assets/google-icon.png' alt='Google' class='google-icon'></button><br><br><br>
   <p class='font-small'>Se não tem um conta, <a href='/#signup'>registre-se.</a></p>
   </div>
   `;
