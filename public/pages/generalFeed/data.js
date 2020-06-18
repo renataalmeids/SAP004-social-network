@@ -1,7 +1,7 @@
 // Data da publicação:
 const getData = () => {
   const data = new Date();
-  return data.toLocaleDateString();
+  return data.toLocaleString();
 };
 
 export const logOut = () => {
@@ -11,10 +11,7 @@ export const logOut = () => {
     .then(() => {
       window.location.hash = '#login';
     })
-    .catch((error) => {
-      console.log(error.code);
-      console.log(error.message);
-    });
+    .catch(error => error);
 };
 
 export const createPost = (postText) => {
@@ -38,6 +35,7 @@ export const readPost = (callback) => {
   firebase
     .firestore()
     .collection('posts')
+    .orderBy('data', 'desc')
     .onSnapshot((snapshot) => {
       const post = [];
       snapshot.forEach((doc) => {
@@ -46,7 +44,7 @@ export const readPost = (callback) => {
           user,
           data,
           text,
-          code: doc.id
+          code: doc.id,
         });
       });
       callback(post);
@@ -62,7 +60,6 @@ export const editPost = (newText, postID) => {
     .then(() => console.log('Postagem editada com sucesso'))
     .catch(() => console.log('Ops!Postagem não editada'));
 };
-
 
 export const deletePost = (id) => {
   firebase.firestore().collection('posts').doc(id).delete().then(function() {
