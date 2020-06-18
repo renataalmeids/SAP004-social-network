@@ -1,7 +1,8 @@
-export const register = (email, password, onError) => firebase
+export const register = (name, email, password, onError) => firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
-  .then(() => {
+  .then((cred) => {
     window.location.hash = ('#login');
+    cred.user.updateProfile({ displayName: name });
   })
   .catch(error => onError(error));

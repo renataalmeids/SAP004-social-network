@@ -3,8 +3,8 @@ import {
   createPost,
   readPost,
   editPost,
+  deletePost,
 } from './data.js';
-
 
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
@@ -26,6 +26,12 @@ const resetPost = (postList) => {
   clearPostArea();
   postList.forEach(loadPostTemplate);
 };
+
+const deleteEvent = (postBox, code) => {
+  console.log(code)
+  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`)
+  deleteBtn.addEventListener('click',() => deletePost(code))
+}
 
 export const generalFeed = () => {
   // Criar elementos gerais da página
@@ -120,9 +126,9 @@ const loadPostTemplate = ({
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
+  deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
-
   // Programando manipulação dos elementos do template na edição das postagens:
   postBox.querySelector('.edit-btn').addEventListener('click', () => {
     postBox.querySelector('.text').removeAttribute('disabled');
