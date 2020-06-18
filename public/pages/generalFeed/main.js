@@ -50,6 +50,8 @@ export const generalFeed = () => {
     </nav>
   </header>
 
+
+
   <div class='box-feed'>
       <section class='profile-area'>
       <div class='profile-area-theme'></div>
