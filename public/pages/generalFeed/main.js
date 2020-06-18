@@ -5,7 +5,6 @@ import {
   editPost,
 } from './data.js';
 
-
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -49,9 +48,6 @@ export const generalFeed = () => {
       </div>
     </nav>
   </header>
-
-
-
   <div class='box-feed'>
       <section class='profile-area'>
       <div class='profile-area-theme'></div>
