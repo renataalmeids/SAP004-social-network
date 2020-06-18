@@ -58,6 +58,10 @@
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
   }
   
+  .btn:hover {
+    opacity: 0.7;
+  }
+  
   .btn-small {
     width: 100px;
     padding: 2px;
@@ -80,6 +84,7 @@
     font-size: 0.8em;
   }
   
+  .post-area-icon-del,
   .google-icon {
     height: 15px;
     width: 15px;
@@ -104,11 +109,10 @@
   }
   /*Feed Geral*/
   
-  .navbar {
-    border-bottom: 2px solid #4880f7;
+  .navbar-page-feed {
+    border-bottom: 2px solid #49a562;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 5px 30px;
     height: 40px;
     margin-bottom: 20px;
@@ -122,12 +126,13 @@
   }
   
   .circle:hover {
-    width: 32px;
-    height: 32px;
+    opacity: 0.6;
   }
   
   .icon-logo {
     border-radius: 0px;
+    width: 28px;
+    height: 28px;
   }
   
   .icon-circle {
@@ -197,20 +202,19 @@
   .footer-post-box {
     padding: 3px 10px 0px 10px;
     display: flex;
+    border-top: 1px solid lightgray;
   }
   
   .title-post-box {
     font-size: 0.8em;
     background-color: lightgray;
+    display: flex;
+    justify-content: space-between;
   }
   
   .title-post-box div:nth-child(2) {
     font-size: 0.7em;
     margin-top: 3px;
-  }
-  
-  .footer-post-box {
-    border-top: 1px solid lightgray;
   }
   
   .post-area-text {
@@ -224,18 +228,25 @@
   .post-area-icon {
     height: 18px;
     width: 18px;
+  }
+  
+  .post-area-icon {
     margin-right: 10px;
   }
   
   .post-area-icon:hover {
-    height: 20px;
-    width: 20px;
+    opacity: 0.6;
   }
   
   .delete-btn {
     border: none;
     outline: none;
     background-color: transparent;
+  }
+  
+  .post-area-icon-del:hover {
+    width: 20px;
+    height: 20px;
   }
   
   .display-none {
@@ -259,10 +270,10 @@
       width: 60%;
       height: 40%;
     }
-    .loginArea {
+    .login-area {
       width: 55%;
     }
-    .buttonArea {
+    .button-area {
       width: 35%;
     }
   }
@@ -285,6 +296,7 @@
       padding: 0px;
     }
     .profile-area-theme {
+      background-color: lightgray;
       width: 100%;
       height: 50%;
       margin-bottom: 10px;

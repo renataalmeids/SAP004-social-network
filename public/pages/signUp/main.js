@@ -10,6 +10,7 @@ export const signUp = () => {
   containerSignUp.innerHTML = `
   <div class='box-item'><h1>RAINBOW</h1>
   <img src='../../assets/logo_small.jpg' alt='Logotype' class='icon-large'>
+  <h3 class='slogan-desktop'>A rede social da comunidade LGBTQI+</h3>
   
   </div><br>
   <div class='box-item'>

@@ -34,12 +34,13 @@ export const generalFeed = () => {
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
   <header>
-    <nav class='navbar'>
+    <nav class='navbar-page-feed'>
       <figure>
-          <img class='icon-circle icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+          <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+          <span>Rainbow!</span>
       </figure>
       <div>
-        <button class='circle yellow'>
+        <button class='circle red'>
         <img class='icon-circle' src='../../assets/settings.png'>
         </button>
         <button class='circle signOut orange'>
@@ -51,13 +52,14 @@ export const generalFeed = () => {
 
   <div class='box-feed'>
       <section class='profile-area'>
+      <div class='profile-area-theme'></div>
         <figure>
           <img class='photo'>
         </figure>
         <div class='name-profile-area'>
           <h3>Fulane da Silva Sauro
           </h3>
-          <h5>Descrição</h5>
+          <h4>[Descrição]</h4>
         </div>
       </section>
 
@@ -99,19 +101,27 @@ const loadPostTemplate = ({
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
+
   <header class='title-post-box'>
-    <div>${user}</div>
-    <div>${data}</div>
+    <div>
+      <div>${user}</div>
+      <div>${data}</div>
+    </div>
+    <div>
+      <button class='delete-btn' data-id='${code}'><img class='post-area-icon-del' src="../../assets/quit.png" alt="Edit Icon">
+      </button>
+    </div>
   </header>
+
   <textarea disabled class='text post-area-text'>${text}</textarea>
   <div class='save-btn-area display-none''>
     <button class='edit-save-btn' type='button'>Salvar</button>
   </div>
+  
   <footer class='footer-post-box'>
     <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
     <div><img class='post-area-icon' src="../../assets/like.png" alt="Like Icon"></div>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
-    <div class='post-area-icon-del'><button><img class='post-area-icon' src="../../assets/quit.png" alt="Edit Icon"></button></div>
   </footer>
   `;
   postBox.classList.add('post-area');
