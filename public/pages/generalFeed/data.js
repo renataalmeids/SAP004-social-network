@@ -60,3 +60,12 @@ export const editPost = (newText, postID) => {
     .then(() => console.log('Postagem editada com sucesso'))
     .catch(() => console.log('Ops!Postagem não editada'));
 };
+
+
+export const deletePost = (id) => {
+  firebase.firestore().collection('posts').doc(id).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+};
