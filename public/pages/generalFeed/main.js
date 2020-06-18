@@ -48,25 +48,17 @@ export const generalFeed = () => {
       </div>
     </nav>
   </header>
-  <div class='boxFeed'>
-    <section class='profile-area'>
-      <figure>
-        <img class='photo'>
-      </figure>
-      <div class='name-profile-area'>
-        <h3>${firebase.auth().currentUser.displayName}</h3>
-        <h5>Descrição</h5>
-      </div>
-    </section>
-    <div class='share-and-post'>
-    <section class='share-area'>
-      <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
-      <div class='share-area-buttons'>
-        <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
-        <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
-      </div> 
-    </section>
-    <section id='post-area' class='posts-container'>
+  <div class='box-feed'>
+      <section class='profile-area'>
+      <div class='profile-area-theme'></div>
+        <figure>
+          <img class='photo'>
+        </figure>
+        <div class='name-profile-area'>
+          <h3>Fulane da Silva Sauro
+          </h3>
+          <h4>[Descrição]</h4>
+        </div>
       </section>
 
       <div class='share-and-post'>
