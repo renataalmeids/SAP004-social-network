@@ -1,5 +1,8 @@
 import {
-  logOut, createPost, readPost, editPost,
+  logOut,
+  createPost,
+  readPost,
+  editPost,
 } from './data.js';
 
 
@@ -30,9 +33,8 @@ export const generalFeed = () => {
   document.querySelector('#root').innerHTML = '';
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
-  <div class='general-container'>
   <header>
-  <nav class='navbar'>
+    <nav class='navbar'>
       <figure>
           <img class='icon-circle icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
       </figure>
@@ -46,30 +48,32 @@ export const generalFeed = () => {
       </div>
     </nav>
   </header>
-  <div class='boxFeed'>
-    <section class='profile-area'>
-      <figure>
-        <img class='photo'>
-      </figure>
-      <div class='name-profile-area'>
-        <h3>Fulane da Silva Sauro
-        </h3>
-        <h5>Descrição</h5>
-      </div>
-    </section>
-    <div class='share-and-post'>
-    <section class='share-area'>
-      <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
-      <div class='share-area-buttons'>
-        <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
-        <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
-      </div> 
-    </section>
-    <section id='post-area' class='posts-container'>
+
+  <div class='box-feed'>
+      <section class='profile-area'>
+        <figure>
+          <img class='photo'>
+        </figure>
+        <div class='name-profile-area'>
+          <h3>Fulane da Silva Sauro
+          </h3>
+          <h5>Descrição</h5>
+        </div>
       </section>
-    </div>
-  </div>
-  </div>
+
+      <div class='share-and-post'>
+        <section class='share-area'>
+          <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
+          <div class='share-area-buttons'>
+            <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
+          </div> 
+        </section>
+
+        <section id='post-area' class='posts-container'>
+        </section>
+      </div>
+   </div>
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
@@ -87,24 +91,27 @@ const getValuesFromEditedPost = (listener, newText, postID) => listener.addEvent
 
 // Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
 const loadPostTemplate = ({
-  code, user, data, text,
+  code,
+  user,
+  data,
+  text,
 }) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
   <header class='title-post-box'>
-    <div>${user}</div><div>${data}</div>
+    <div>${user}</div>
+    <div>${data}</div>
   </header>
-  <input disabled class='text' type='text' value='${text}'>
+  <textarea disabled class='text post-area-text'>${text}</textarea>
   <div class='save-btn-area display-none''>
     <button class='edit-save-btn' type='button'>Salvar</button>
-    <button class='edit-cancel-btn' type='button'>Cancelar</button>
   </div>
   <footer class='footer-post-box'>
-    <div>Curtidas</div>
-    <div>Comentários</div>
-    <div><button class='edit-btn'>Editar<buttton></div>
-    <div>Excluir</div>
+    <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
+    <div><img class='post-area-icon' src="../../assets/like.png" alt="Like Icon"></div>
+    <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
+    <div class='post-area-icon-del'><button><img class='post-area-icon' src="../../assets/quit.png" alt="Edit Icon"></button></div>
   </footer>
   `;
   postBox.classList.add('post-area');
