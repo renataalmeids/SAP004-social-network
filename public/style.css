@@ -252,6 +252,10 @@
   .display-none {
     display: none;
   }
+  
+  .visibility {
+    visibility: hidden;
+  }
   /*Responsividade: versão laptop*/
   /*Tela de login*/
   

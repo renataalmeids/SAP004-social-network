@@ -48,7 +48,7 @@ export const generalFeed = () => {
       </div>
       <figure class='navbar-page-item-logo'>
         <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-         <span>Rainbow!</span>
+        <span>Rainbow!</span>
       </figure>
       <div>
         <button class='circle signOut yellow'>
@@ -78,7 +78,6 @@ export const generalFeed = () => {
         </section>
       </div>
   </div>
->>>>>>> 1db46eea2947ca2e5a086fe7f81f178c97f90144
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
@@ -126,6 +125,10 @@ const loadPostTemplate = ({
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
+  if (user !== firebase.auth().currentUser.email) {
+    postBox.querySelector('.delete-btn').classList.add('visibility');
+    postBox.querySelector('.edit-btn').classList.add('visibility');
+  }
   deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
