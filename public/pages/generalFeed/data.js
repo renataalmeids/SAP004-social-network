@@ -61,7 +61,6 @@ export const editPost = (newText, postID) => {
     .catch(() => console.log('Ops!Postagem não editada'));
 };
 
-
 export const deletePost = (id) => {
   firebase.firestore().collection('posts').doc(id).delete().then(function() {
       console.log("Document successfully deleted!");

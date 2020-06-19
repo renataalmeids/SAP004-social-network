@@ -48,7 +48,7 @@ export const generalFeed = () => {
       </div>
       <figure class='navbar-page-item-logo'>
         <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-         <span>Rainbow!</span>
+        <span>Rainbow!</span>
       </figure>
       <div>
         <button class='circle signOut yellow'>
@@ -103,7 +103,6 @@ const loadPostTemplate = ({
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
-
   <header class='title-post-box'>
     <div>
       <div>${user}</div>
@@ -126,6 +125,10 @@ const loadPostTemplate = ({
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
+  if (user !== firebase.auth().currentUser.email) {
+    postBox.querySelector('.delete-btn').classList.add('visibility');
+    postBox.querySelector('.edit-btn').classList.add('visibility');
+  }
   deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
