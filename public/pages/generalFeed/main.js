@@ -41,48 +41,42 @@ export const generalFeed = () => {
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
   <header>
-    <nav class='navbar-page-feed'>
-      <figure>
-          <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-          <span>Rainbow!</span>
-      </figure>
-      <div>
-        <button class='circle red'>
-        <img class='icon-circle' src='../../assets/settings.png'>
-        </button>
-        <button class='circle signOut orange'>
-        <img class='icon-circle' src='../../assets/logout.png'>
-        </button>
+  <nav class='navbar-page-feed'>
+    <figure>
+      <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+      <span>Rainbow!</span>
+    </figure>
+    <div>
+      <button class='circle red'>
+      <img class='icon-circle' src='../../assets/settings.png'>
+      </button>
+      <button class='circle signOut orange'>
+      <img class='icon-circle' src='../../assets/logout.png'>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class='box-feed'>
+  <section class='profile-area'>
+    <div class='profile-area-theme'></div>
+      <figure><img class='photo'></figure>
+      <div class='name-profile-area'>
+        <h3>${firebase.auth().currentUser.displayName}</h3>
+        <h4>[Descrição]</h4>
       </div>
-    </nav>
-  </header>
-
-  <div class='box-feed'>
-      <section class='profile-area'>
-      <div class='profile-area-theme'></div>
-        <figure>
-          <img class='photo'>
-        </figure>
-        <div class='name-profile-area'>
-          <h3>Fulane da Silva Sauro
-          </h3>
-          <h4>[Descrição]</h4>
+  </section>
+    <div class='share-and-post'>
+      <section class='share-area'>
+        <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
+        <div class='share-area-buttons'>
+          <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+          <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
         </div>
       </section>
-
-      <div class='share-and-post'>
-        <section class='share-area'>
-          <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
-          <div class='share-area-buttons'>
-            <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
-            <button id='publish-btn' class='btn btn-small purple'>Publicar</button>    
-          </div> 
-        </section>
-
-        <section id='post-area' class='posts-container'>
-        </section>
-      </div>
-      </div>
+      <section id='post-area' class='posts-container'>
+      </section>
+    </div>
+</div>
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
@@ -109,7 +103,6 @@ const loadPostTemplate = ({
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
-
   <header class='title-post-box'>
     <div>
       <div>${user}</div>
