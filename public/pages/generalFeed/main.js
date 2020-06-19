@@ -6,7 +6,6 @@ import {
   deletePost,
 } from './data.js';
 
-
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -41,42 +40,45 @@ export const generalFeed = () => {
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
   <header>
-  <nav class='navbar-page-feed'>
-    <figure>
-      <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-      <span>Rainbow!</span>
-    </figure>
-    <div>
-      <button class='circle red'>
-      <img class='icon-circle' src='../../assets/settings.png'>
-      </button>
-      <button class='circle signOut orange'>
-      <img class='icon-circle' src='../../assets/logout.png'>
-      </button>
-    </div>
-  </nav>
-</header>
-<div class='box-feed'>
-  <section class='profile-area'>
-    <div class='profile-area-theme'></div>
-      <figure><img class='photo'></figure>
-      <div class='name-profile-area'>
-        <h3>${firebase.auth().currentUser.displayName}</h3>
-        <h4>[Descrição]</h4>
+    <nav class='navbar-page-feed'>
+      <div>
+        <button class='circle orange'>
+        <img class='icon-circle' src='../../assets/settings.png'>
+        </button>
       </div>
-  </section>
-    <div class='share-and-post'>
-      <section class='share-area'>
-        <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
-        <div class='share-area-buttons'>
-          <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
-          <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
+      <figure class='navbar-page-item-logo'>
+        <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+         <span>Rainbow!</span>
+      </figure>
+      <div>
+        <button class='circle signOut yellow'>
+        <img class='icon-circle' src='../../assets/logout.png'>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <div class='box-feed'>
+    <section class='profile-area'>
+      <div class='profile-area-theme'></div>
+        <figure><img class='photo'></figure>
+        <div class='name-profile-area'>
+          <h3>${firebase.auth().currentUser.displayName}</h3>
+          <h4>[Descrição]</h4>
         </div>
-      </section>
-      <section id='post-area' class='posts-container'>
-      </section>
-    </div>
-</div>
+    </section>
+      <div class='share-and-post'>
+        <section class='share-area'>
+          <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
+          <div class='share-area-buttons'>
+            <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
+          </div>
+        </section>
+        <section id='post-area' class='posts-container'>
+        </section>
+      </div>
+  </div>
+>>>>>>> 1db46eea2947ca2e5a086fe7f81f178c97f90144
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
@@ -85,7 +87,6 @@ export const generalFeed = () => {
   getTextToPublish();
   readPost(resetPost);
 };
-
 
 // Função de edição das postagens chamadas na criação de dos posts individuais
 //  (function loadPostTemplate)
