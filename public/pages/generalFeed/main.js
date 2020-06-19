@@ -28,10 +28,9 @@ const resetPost = (postList) => {
 };
 
 const deleteEvent = (postBox, code) => {
-  console.log(code)
-  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`)
-  deleteBtn.addEventListener('click',() => deletePost(code))
-}
+  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`);
+  deleteBtn.addEventListener('click', () => deletePost(code));
+};
 
 export const generalFeed = () => {
   // Criar elementos gerais da página
