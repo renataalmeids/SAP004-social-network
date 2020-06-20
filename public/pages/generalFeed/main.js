@@ -29,9 +29,19 @@ const resetPost = (postList) => {
 
 const deleteEvent = (postBox, code) => {
   console.log(code)
-  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`)
-  deleteBtn.addEventListener('click',() => deletePost(code))
-}
+  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`);
+  deleteBtn.addEventListener('click', () => deletePost(code));
+};
+
+
+// Funções da piblicação de arquivos (firebaseStorage)
+// Atribuir essa função ao botão da camera
+const toPublishMedias = () => {
+  console.log('tentando publicar uma foto');
+
+  // Passar função de fechar botão para botão publicar
+};
+
 
 export const generalFeed = () => {
   // Criar elementos gerais da página
@@ -85,6 +95,7 @@ export const generalFeed = () => {
   setLogOutOnButton();
   getTextToPublish();
   readPost(resetPost);
+  toPublishMedias(containerFeed);
 };
 
 // Função de edição das postagens chamadas na criação de dos posts individuais

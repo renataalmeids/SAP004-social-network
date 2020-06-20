@@ -14,6 +14,7 @@ export const logOut = () => {
     .catch(error => error);
 };
 
+// Função que cria os documentos (posts) no banco de dados
 export const createPost = (postText) => {
   firebase
     .firestore()
@@ -25,11 +26,13 @@ export const createPost = (postText) => {
     })
     .then((doc) => {
       console.log('Document written with ID: ', doc.id);
+      (doc.data())
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
     });
 };
+
 
 export const readPost = (callback) => {
   firebase
@@ -63,9 +66,9 @@ export const editPost = (newText, postID) => {
 
 
 export const deletePost = (id) => {
-  firebase.firestore().collection('posts').doc(id).delete().then(function() {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
-    });
+  firebase.firestore().collection('posts').doc(id).delete().then(function () {
+    console.log("Document successfully deleted!");
+  }).catch(function (error) {
+    console.error("Error removing document: ", error);
+  });
 };
