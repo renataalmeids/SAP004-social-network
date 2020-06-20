@@ -6,7 +6,6 @@ import {
   deletePost,
 } from './data.js';
 
-
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -29,7 +28,6 @@ const resetPost = (postList) => {
 };
 
 const deleteEvent = (postBox, code) => {
-  console.log(code)
   const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`);
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
