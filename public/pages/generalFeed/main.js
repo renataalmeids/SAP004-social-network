@@ -6,6 +6,7 @@ import {
   deletePost,
 } from './data.js';
 
+
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
