@@ -26,7 +26,6 @@ export const createPost = (postText) => {
     })
     .then((doc) => {
       console.log('Document written with ID: ', doc.id);
-      (doc.data())
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
@@ -34,7 +33,7 @@ export const createPost = (postText) => {
 };
 
 
-export const readPost = (callback) => {
+export const readPost = (showInfosOnTemplate) => {
   firebase
     .firestore()
     .collection('posts')
@@ -50,7 +49,7 @@ export const readPost = (callback) => {
           code: doc.id,
         });
       });
-      callback(post);
+      showInfosOnTemplate(post);
     });
 };
 
@@ -63,7 +62,6 @@ export const editPost = (newText, postID) => {
     .then(() => console.log('Postagem editada com sucesso'))
     .catch(() => console.log('Ops!Postagem não editada'));
 };
-
 
 export const deletePost = (id) => {
   firebase.firestore().collection('posts').doc(id).delete().then(function () {

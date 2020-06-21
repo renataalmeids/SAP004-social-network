@@ -6,6 +6,7 @@ import {
   deletePost,
 } from './data.js';
 
+
 // Funções chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -33,15 +34,6 @@ const deleteEvent = (postBox, code) => {
 };
 
 
-// Funções da piblicação de arquivos (firebaseStorage)
-// Atribuir essa função ao botão da camera
-const toPublishMedias = () => {
-  console.log('tentando publicar uma foto');
-
-  // Passar função de fechar botão para botão publicar
-};
-
-
 export const generalFeed = () => {
   // Criar elementos gerais da página
   // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
@@ -57,7 +49,7 @@ export const generalFeed = () => {
       </div>
       <figure class='navbar-page-item-logo'>
         <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-         <span>Rainbow!</span>
+        <span>Rainbow!</span>
       </figure>
       <div>
         <button class='circle signOut yellow'>
@@ -94,10 +86,9 @@ export const generalFeed = () => {
   setLogOutOnButton();
   getTextToPublish();
   readPost(resetPost);
-  toPublishMedias(containerFeed);
 };
 
-// Função de edição das postagens chamadas na criação de dos posts individuais
+// Função de edição das postagens chamadas na criação dos posts individuais
 //  (function loadPostTemplate)
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
@@ -113,7 +104,6 @@ const loadPostTemplate = ({
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
-
   <header class='title-post-box'>
     <div>
       <div>${user}</div>
@@ -136,6 +126,10 @@ const loadPostTemplate = ({
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
+  if (user !== firebase.auth().currentUser.email) {
+    postBox.querySelector('.delete-btn').classList.add('visibility');
+    postBox.querySelector('.edit-btn').classList.add('visibility');
+  }
   deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
