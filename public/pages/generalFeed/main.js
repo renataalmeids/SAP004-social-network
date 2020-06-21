@@ -4,10 +4,11 @@ import {
   readPost,
   editPost,
   deletePost,
+  sendImageToDatabase,
 } from './data.js';
 
 
-// Funções chamadas na criação do template da página (function generalFeed())
+// Funções auxiliares chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -33,6 +34,44 @@ const deleteEvent = (postBox, code) => {
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
 
+// Publicação de fotos
+
+const createFormToInputFiles = () => {
+  return `
+  <section>
+    <form method="post">
+      <div>
+        <input type="file" id="image_uploads" accept=".jpg, .jpeg, .png">
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+  </form>
+</section>`;
+};
+
+
+
+// Manipulação da publicação de imagens:
+const uploadImage = () => {
+  const inputFile = document.querySelector('#image_uploads');
+  inputFile.style.backgroundColor = 'red';
+
+  // Escutar uploads novos (mudanças de valor do input
+  inputFile.onchange = (event) => {
+    const file = event.target.files[0];
+    console.log(file.name);
+    sendImageToDatabase(file);
+  };
+};
+
+const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
+
+
+
+//--------------------------------------------
+
+// Função executada com o carregamento da página:
 
 export const generalFeed = () => {
   // Criar elementos gerais da página
@@ -71,9 +110,12 @@ export const generalFeed = () => {
         <section class='share-area'>
           <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
           <div class='share-area-buttons'>
-            <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <button id='publish-img-btn' class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
             <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
           </div>
+        </section>
+        <section class='share-area-img'>
+        Aqui vai as minhas imagens
         </section>
         <section id='post-area' class='posts-container'>
         </section>
@@ -82,19 +124,26 @@ export const generalFeed = () => {
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
+  // Anexar também form para publicação de imagens
+  document.querySelector('.share-area-img').innerHTML = createFormToInputFiles();
+  listenUpLoadImgClick();
+
   // Chamada das funções
   setLogOutOnButton();
   getTextToPublish();
   readPost(resetPost);
 };
 
-// Função de edição das postagens chamadas na criação dos posts individuais
-//  (function loadPostTemplate)
+
+// -------------------------------
+
+// Funções auxiliares para edição das postagens chamadas na criação dos posts individuais
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
+
 });
 
-// Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
+// Criação dos templates das postagens individuais
 const loadPostTemplate = ({
   code,
   user,

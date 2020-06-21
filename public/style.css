@@ -249,6 +249,10 @@
     height: 20px;
   }
   
+  .share-area-img {
+    border: solid red
+  }
+  
   .display-none {
     display: none;
   }
