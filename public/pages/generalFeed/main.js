@@ -4,9 +4,25 @@ import {
   readPost,
   editPost,
   deletePost,
+  sendImageToDatabase,
 } from './data.js';
 
-// Funções chamadas na criação do template da página (function generalFeed())
+
+const userName = () => {
+  const promise = new Promise((resolve) => {
+    const name = firebase.auth().currentUser.displayName;
+    resolve(name);
+  });
+  return promise;
+};
+
+userName().then((name) => {
+  console.log(name);
+  return name;
+});
+userName().catch(() => console.log('não deu certo'));
+
+// Funções auxiliares chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -28,11 +44,28 @@ const resetPost = (postList) => {
 };
 
 const deleteEvent = (postBox, code) => {
-  console.log(code)
-  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`)
-  deleteBtn.addEventListener('click',() => deletePost(code))
-}
+  const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`);
+  deleteBtn.addEventListener('click', () => deletePost(code));
+};
 
+
+// Manipulação da publicação de imagens:
+const showUrlOnPublishArea = (urlFile) => {
+  // quando a pessoa clicar na foto abrir a url e ver foto real
+  document.querySelector('#postText').value = `Imagem: ${urlFile}`;
+};
+
+const uploadImage = () => {
+  document.querySelector('.publish-img-form-box').style.opacity = 1;
+  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOnPublishArea);
+};
+
+const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
+
+
+//--------------------------------------------
+
+// Função executada com o carregamento da página:
 export const generalFeed = () => {
   // Criar elementos gerais da página
   // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
@@ -62,7 +95,8 @@ export const generalFeed = () => {
       <div class='profile-area-theme'></div>
         <figure><img class='photo'></figure>
         <div class='name-profile-area'>
-          <h3>${firebase.auth().currentUser.displayName}</h3>
+          <h3>${userName()}</h3>
+          ${console.log(userName())}
           <h4>[Descrição]</h4>
         </div>
     </section>
@@ -70,7 +104,12 @@ export const generalFeed = () => {
         <section class='share-area'>
           <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
           <div class='share-area-buttons'>
-            <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <button id='publish-img-btn' class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <div class='publish-img-form-box transparency'>
+              <form method="post">
+                <input type="file" id="image_uploads" accept=".jpg, .jpeg, .png">
+               </form>
+            </div>
             <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
           </div>
         </section>
@@ -81,19 +120,25 @@ export const generalFeed = () => {
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
+  listenUpLoadImgClick();
+
   // Chamada das funções
   setLogOutOnButton();
+  listenUpLoadImgClick();
   getTextToPublish();
   readPost(resetPost);
 };
 
-// Função de edição das postagens chamadas na criação de dos posts individuais
-//  (function loadPostTemplate)
+
+// -------------------------------
+
+// Funções auxiliares para edição das postagens chamadas na criação dos posts individuais
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
+
 });
 
-// Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
+// Criação dos templates das postagens individuais
 const loadPostTemplate = ({
   code,
   user,

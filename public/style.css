@@ -253,6 +253,10 @@
     display: none;
   }
   
+  .transparency {
+    opacity: 0;
+  }
+  
   .visibility {
     visibility: hidden;
   }
