@@ -34,7 +34,6 @@ const deleteEvent = (postBox, code) => {
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
 
-
 // Manipulação da publicação de imagens:
 const showUrlOnPublishArea = (urlFile) => {
   // quando a pessoa clicar na foto abrir a url e ver foto real
@@ -81,7 +80,7 @@ export const generalFeed = () => {
       <div class='profile-area-theme'></div>
         <figure><img class='photo'></figure>
         <div class='name-profile-area'>
-          <h3>${firebase.auth().currentUser.displayName}</h3>
+          <h3 id='name-user'></h3>
           <h4>[Descrição]</h4>
         </div>
     </section>
@@ -107,11 +106,24 @@ export const generalFeed = () => {
 
   listenUpLoadImgClick();
 
+  const userName = () => {
+    const name = firebase.auth().currentUser.displayName;
+    const getUserName = document.querySelector('#name-user');
+    getUserName.innerHTML = name;
+    console.log(name);
+    /* .then((name) => {
+        console.log(name);
+
+      })
+      .catch(() => console.log('não deu certo')); */
+  };
+
   // Chamada das funções
   setLogOutOnButton();
   listenUpLoadImgClick();
   getTextToPublish();
   readPost(resetPost);
+  userName();
 };
 
 
@@ -152,7 +164,7 @@ const loadPostTemplate = ({
   <footer class='footer-post-box'>
     <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
     <div><img class='post-area-icon' id='like-icon' src="../../assets/like.png" alt="Like Icon"></div>
-    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>
+    <div class='post-area-icon' id='likes-counter'>${likes}</div>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
