@@ -49,7 +49,6 @@ const uploadImage = () => {
 const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
 
-
 //--------------------------------------------
 
 // Função executada com o carregamento da página:
@@ -83,6 +82,7 @@ export const generalFeed = () => {
         <figure><img class='photo'></figure>
         <div class='name-profile-area'>
           <h3>${firebase.auth().currentUser.displayName}</h3>
+          ${console.log(firebase.auth().currentUser.displayName)}
           <h4>[Descrição]</h4>
         </div>
     </section>
