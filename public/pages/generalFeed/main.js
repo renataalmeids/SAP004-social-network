@@ -8,6 +8,20 @@ import {
 } from './data.js';
 
 
+const userName = () => {
+  const promise = new Promise((resolve) => {
+    const name = firebase.auth().currentUser.displayName;
+    resolve(name);
+  });
+  return promise;
+};
+
+userName().then((name) => {
+  console.log(name);
+  return name;
+});
+userName().catch(() => console.log('não deu certo'));
+
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
@@ -81,8 +95,8 @@ export const generalFeed = () => {
       <div class='profile-area-theme'></div>
         <figure><img class='photo'></figure>
         <div class='name-profile-area'>
-          <h3>${firebase.auth().currentUser.displayName}</h3>
-          ${console.log(firebase.auth().currentUser.displayName)}
+          <h3>${userName()}</h3>
+          ${console.log(userName())}
           <h4>[Descrição]</h4>
         </div>
     </section>
