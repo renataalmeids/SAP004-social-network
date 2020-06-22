@@ -4,9 +4,11 @@ import {
   readPost,
   editPost,
   deletePost,
+  sendImageToDatabase,
+  likePosts,
 } from './data.js';
 
-// Funções chamadas na criação do template da página (function generalFeed())
+// Funções auxiliares chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -32,6 +34,24 @@ const deleteEvent = (postBox, code) => {
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
 
+
+// Manipulação da publicação de imagens:
+const showUrlOnPublishArea = (urlFile) => {
+  // quando a pessoa clicar na foto abrir a url e ver foto real
+  document.querySelector('#postText').value = `Imagem: ${urlFile}`;
+};
+
+const uploadImage = () => {
+  document.querySelector('.publish-img-form-box').style.opacity = 1;
+  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOnPublishArea);
+};
+
+const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
+
+
+//--------------------------------------------
+
+// Função executada com o carregamento da página:
 export const generalFeed = () => {
   // Criar elementos gerais da página
   // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
@@ -47,7 +67,7 @@ export const generalFeed = () => {
       </div>
       <figure class='navbar-page-item-logo'>
         <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-         <span>Rainbow!</span>
+        <span>Rainbow!</span>
       </figure>
       <div>
         <button class='circle signOut yellow'>
@@ -69,7 +89,12 @@ export const generalFeed = () => {
         <section class='share-area'>
           <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
           <div class='share-area-buttons'>
-            <button class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <button id='publish-img-btn' class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <div class='publish-img-form-box transparency'>
+              <form method="post">
+                <input type="file" id="image_uploads" accept=".jpg, .jpeg, .png">
+               </form>
+            </div>
             <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
           </div>
         </section>
@@ -80,29 +105,34 @@ export const generalFeed = () => {
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
+  listenUpLoadImgClick();
+
   // Chamada das funções
   setLogOutOnButton();
+  listenUpLoadImgClick();
   getTextToPublish();
   readPost(resetPost);
 };
 
-// Função de edição das postagens chamadas na criação de dos posts individuais
-//  (function loadPostTemplate)
+
+// -------------------------------
+
+// Funções auxiliares para edição das postagens chamadas na criação dos posts individuais
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
 });
 
-// Tag data com código único de cada post no bd. Essa tag não é renderizada na tela.
+// Criação dos templates das postagens individuais
 const loadPostTemplate = ({
   code,
   user,
   data,
   text,
+  likes,
 }) => {
   const postBox = document.createElement('div');
   postBox.innerHTML = `
   <data value=${code}></data>
-
   <header class='title-post-box'>
     <div>
       <div>${user}</div>
@@ -121,10 +151,17 @@ const loadPostTemplate = ({
   
   <footer class='footer-post-box'>
     <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
-    <div><img class='post-area-icon' src="../../assets/like.png" alt="Like Icon"></div>
+    <div><img class='post-area-icon' id='like-icon' src="../../assets/like.png" alt="Like Icon"></div>
+    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
+  postBox.querySelector('#like-icon').addEventListener('click', () => likePosts(code));
+
+  if (user !== firebase.auth().currentUser.email) {
+    postBox.querySelector('.delete-btn').classList.add('visibility');
+    postBox.querySelector('.edit-btn').classList.add('visibility');
+  }
   deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);

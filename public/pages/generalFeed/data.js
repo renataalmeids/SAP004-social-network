@@ -14,6 +14,7 @@ export const logOut = () => {
     .catch(error => error);
 };
 
+// Função que cria os documentos (posts) no banco de dados
 export const createPost = (postText) => {
   firebase
     .firestore()
@@ -22,6 +23,7 @@ export const createPost = (postText) => {
       user: `${firebase.auth().currentUser.email}`,
       text: postText,
       data: getData(),
+      likes: [],
     })
     .then((doc) => {
       console.log('Document written with ID: ', doc.id);
@@ -31,7 +33,7 @@ export const createPost = (postText) => {
     });
 };
 
-export const readPost = (callback) => {
+export const readPost = (showInfosOnTemplate) => {
   firebase
     .firestore()
     .collection('posts')
@@ -39,17 +41,21 @@ export const readPost = (callback) => {
     .onSnapshot((snapshot) => {
       const post = [];
       snapshot.forEach((doc) => {
-        const { user, data, text } = doc.data();
+        const {
+          user, data, text, likes,
+        } = doc.data();
         post.push({
           user,
           data,
           text,
+          likes,
           code: doc.id,
         });
       });
-      callback(post);
+      showInfosOnTemplate(post);
     });
 };
+
 
 export const editPost = (newText, postID) => {
   console.log(postID);
@@ -61,11 +67,48 @@ export const editPost = (newText, postID) => {
     .catch(() => console.log('Ops!Postagem não editada'));
 };
 
-
 export const deletePost = (id) => {
-  firebase.firestore().collection('posts').doc(id).delete().then(function() {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
+  firebase.firestore().collection('posts').doc(id).delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch((error) => {
+      console.error('Error removing document: ', error);
     });
 };
+
+
+export const sendImageToDatabase = (file, showUrlOnPublishArea) => {
+  const ref = firebase.storage().ref('publishedImages-repository');
+  ref.child(file.name).put(file)
+    .then((snapshot) => {
+      console.log('enviei esse snapshot para o bd:', snapshot.metadata.name);
+      ref.child(file.name).getDownloadURL().then((url) => {
+        // Fazer!
+        showUrlOnPublishArea(url);
+      });
+    });
+};
+
+export const likePosts = (postID) => {
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .update({ likes: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid) });
+};
+
+/* export const commentPosts = (postID, textContent) => {
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .update({
+      comment: {
+        uid: firebase.auth().currentUser.uid,
+        name: firebase.auth().currentUser.displayName,
+        text: textContent,
+      },
+    });
+};
+ */
