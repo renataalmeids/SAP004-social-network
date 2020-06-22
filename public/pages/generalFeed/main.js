@@ -8,19 +8,6 @@ import {
 } from './data.js';
 
 
-const userName = () => {
-  const promise = new Promise((resolve) => {
-    const name = firebase.auth().currentUser.displayName;
-    resolve(name);
-  });
-  return promise;
-};
-
-userName().then((name) => {
-  console.log(name);
-  return name;
-});
-userName().catch(() => console.log('não deu certo'));
 
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
@@ -31,7 +18,13 @@ const setLogOutOnButton = () => {
 };
 
 const getTextToPublish = () => {
-  document.querySelector('#publish-btn').addEventListener('click', () => createPost(document.querySelector('#postText').value));
+  document.querySelector('#publish-btn').addEventListener('click', () => {
+    const text = document.querySelector('#postText').value;
+    createPost(text);
+
+    // fazer um update se o post for uma foto
+    // procurar com search
+  });
 };
 
 const clearPostArea = () => {
@@ -49,10 +42,27 @@ const deleteEvent = (postBox, code) => {
 };
 
 
+// ---------------
+
+const userName = () => {
+  const promise = new Promise((resolve) => {
+    const name = firebase.auth().currentUser.displayName;
+    resolve(name);
+  });
+  return promise;
+};
+
+userName().then((name) => {
+  const getUserName = document.querySelector('#name-user');
+  getUserName.innerHTML = name;
+  return name;
+});
+userName().catch(() => console.log('não deu certo'));
+
+
 // Manipulação da publicação de imagens:
 const showUrlOnPublishArea = (urlFile) => {
-  // quando a pessoa clicar na foto abrir a url e ver foto real
-  document.querySelector('#postText').value = `Imagem: ${urlFile}`;
+  document.querySelector('#postText').value = `${urlFile}`;
 };
 
 const uploadImage = () => {
@@ -95,7 +105,7 @@ export const generalFeed = () => {
       <div class='profile-area-theme'></div>
         <figure><img class='photo'></figure>
         <div class='name-profile-area'>
-          <h3>${userName()}</h3>
+          <h3 id='name-user'>${userName()}</h3>
           ${console.log(userName())}
           <h4>[Descrição]</h4>
         </div>
@@ -119,8 +129,6 @@ export const generalFeed = () => {
   </div>
   `;
   document.querySelector('#root').appendChild(containerFeed);
-
-  listenUpLoadImgClick();
 
   // Chamada das funções
   setLogOutOnButton();
@@ -177,6 +185,7 @@ const loadPostTemplate = ({
   deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
+
   // Programando manipulação dos elementos do template na edição das postagens:
   postBox.querySelector('.edit-btn').addEventListener('click', () => {
     postBox.querySelector('.text').removeAttribute('disabled');

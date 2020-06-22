@@ -76,9 +76,7 @@ export const sendImageToDatabase = (file, showUrlOnPublishArea) => {
   ref.child(file.name).put(file)
     .then((snapshot) => {
       console.log('enviei esse snapshot para o bd:', snapshot.metadata.name);
-      ref.child(file.name).getDownloadURL().then((url) => {
-        // Fazer!
-        showUrlOnPublishArea(url);
-      });
+      ref.child(file.name).getDownloadURL()
+        .then(url => showUrlOnPublishArea(url));
     });
 }
