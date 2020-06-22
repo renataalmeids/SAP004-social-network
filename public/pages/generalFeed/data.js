@@ -71,15 +71,14 @@ export const deletePost = (id) => {
   });
 };
 
-export const sendImageToDatabase = (file) => {
+export const sendImageToDatabase = (file, showUrlOnPublishArea) => {
   const ref = firebase.storage().ref('publishedImages-repository');
   ref.child(file.name).put(file)
     .then((snapshot) => {
-      // atrbuir id unico ao file
-      // associar file ao usuario
-      // passar a função que coloca o file no feed de publicação como callback
-
       console.log('enviei esse snapshot para o bd:', snapshot.metadata.name);
-    })
-    .catch();
+      ref.child(file.name).getDownloadURL().then((url) => {
+        // Fazer!
+        showUrlOnPublishArea(url);
+      });
+    });
 }

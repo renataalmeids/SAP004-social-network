@@ -34,35 +34,16 @@ const deleteEvent = (postBox, code) => {
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
 
-// Publicação de fotos
-
-const createFormToInputFiles = () => {
-  return `
-  <section>
-    <form method="post">
-      <div>
-        <input type="file" id="image_uploads" accept=".jpg, .jpeg, .png">
-      </div>
-      <div>
-        <button>Submit</button>
-      </div>
-  </form>
-</section>`;
-};
-
-
 
 // Manipulação da publicação de imagens:
-const uploadImage = () => {
-  const inputFile = document.querySelector('#image_uploads');
-  inputFile.style.backgroundColor = 'red';
+const showUrlOnPublishArea = (urlFile) => {
+  // quando a pessoa clicar na foto abrir a url e ver foto real
+  document.querySelector('#postText').value = `Imagem: ${urlFile}`;
+};
 
-  // Escutar uploads novos (mudanças de valor do input
-  inputFile.onchange = (event) => {
-    const file = event.target.files[0];
-    console.log(file.name);
-    sendImageToDatabase(file);
-  };
+const uploadImage = () => {
+  document.querySelector('.publish-img-form-box').style.opacity = 1;
+  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOnPublishArea);
 };
 
 const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
@@ -72,7 +53,6 @@ const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').ad
 //--------------------------------------------
 
 // Função executada com o carregamento da página:
-
 export const generalFeed = () => {
   // Criar elementos gerais da página
   // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
@@ -111,11 +91,13 @@ export const generalFeed = () => {
           <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
           <div class='share-area-buttons'>
             <button id='publish-img-btn' class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
+            <div class='publish-img-form-box transparency'>
+              <form method="post">
+                <input type="file" id="image_uploads" accept=".jpg, .jpeg, .png">
+               </form>
+            </div>
             <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
           </div>
-        </section>
-        <section class='share-area-img'>
-        Aqui vai as minhas imagens
         </section>
         <section id='post-area' class='posts-container'>
         </section>
@@ -124,12 +106,11 @@ export const generalFeed = () => {
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
-  // Anexar também form para publicação de imagens
-  document.querySelector('.share-area-img').innerHTML = createFormToInputFiles();
   listenUpLoadImgClick();
 
   // Chamada das funções
   setLogOutOnButton();
+  listenUpLoadImgClick();
   getTextToPublish();
   readPost(resetPost);
 };
