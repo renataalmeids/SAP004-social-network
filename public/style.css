@@ -162,7 +162,7 @@
   
   .share-area,
   .post-area,
-  .share-area textarea {
+  .share-area textarea {        /*olha com atenção*/
     padding: 10px;
     margin: 10px 30px;
     border: 1px solid lightgrey;
@@ -206,39 +206,40 @@
   }
   
   .title-post-box {
-    font-size: 0.8em;
+    font-size: 14px;
     background-color: lightgray;
     display: flex;
     justify-content: space-between;
   }
   
   .title-post-box div:nth-child(2) {
-    font-size: 0.7em;
+    font-size: 12px;
     margin-top: 3px;
   }
   
-  .post-area-text {
+  .post-area-text {                         /*dentro do post*/
     font-family: Arial, Helvetica, sans-serif;
     height: 60px;
-    padding: 10px;
+    /*padding: 10px;*/
+    padding: 40px;
     border: none;
     word-break: break-all;
   }
   
-  .post-area-icon {
+  .post-area-icon {       /*nope*/
     height: 18px;
     width: 18px;
   }
   
-  .post-area-icon {
-    margin-right: 10px;
+  .post-area-icon {       /*nope*/
+    margin-right: 50px;
   }
   
-  .post-area-icon:hover {
+  .post-area-icon:hover {     /*nope*/
     opacity: 0.6;
   }
   
-  .delete-btn {
+  .delete-btn {               /*nope*/
     border: none;
     outline: none;
     background-color: transparent;
@@ -249,12 +250,25 @@
     height: 20px;
   }
   
+        /*botão editar*/
   .display-none {
     display: none;
   }
+
+  /*
+  .edit-save-btn{
+    align-items: center;
+  }*/
   
   .visibility {
     visibility: hidden;
+  }
+
+  footer {
+    color: black;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 20px;
   }
   /*Responsividade: versão laptop*/
   /*Tela de login*/

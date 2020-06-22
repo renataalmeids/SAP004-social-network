@@ -15,7 +15,10 @@ const setLogOutOnButton = () => {
 };
 
 const getTextToPublish = () => {
-  document.querySelector('#publish-btn').addEventListener('click', () => createPost(document.querySelector('#postText').value));
+  document.querySelector('#publish-btn').addEventListener('click', () => {
+    createPost(document.querySelector('#postText').value);
+    document.querySelector('#postText').value = "";
+  });
 };
 
 const clearPostArea = () => {
