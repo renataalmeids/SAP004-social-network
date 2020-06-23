@@ -1,4 +1,3 @@
-// Data da publicação:
 const getData = () => {
   const data = new Date();
   return data.toLocaleString();
@@ -14,7 +13,7 @@ export const logOut = () => {
     .catch(error => error);
 };
 
-// Função que cria os documentos (posts) no banco de dados
+
 export const createPost = (postText) => {
   firebase
     .firestore()
@@ -23,6 +22,7 @@ export const createPost = (postText) => {
       user: `${firebase.auth().currentUser.email}`,
       text: postText,
       data: getData(),
+      likes: [],
       url: '',
     });
 };
@@ -36,12 +36,13 @@ export const readPost = (callbackToManipulatePostList) => {
     .onSnapshot((snapshot) => {
       const post = [];
       snapshot.forEach((doc) => {
-        const { user, data, text } = doc.data();
+        const { user, data, text, likes } = doc.data();
         post.push({
           user,
           data,
           text,
           code: doc.id,
+          likes,
         });
       });
       // a callback é substituída pela função resetPost na chamada da função
