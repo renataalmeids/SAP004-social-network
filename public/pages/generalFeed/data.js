@@ -1,4 +1,3 @@
-// Data da publicação:
 const getData = () => {
   const data = new Date();
   return data.toLocaleString();
@@ -14,7 +13,7 @@ export const logOut = () => {
     .catch(error => error);
 };
 
-// Função que cria os documentos (posts) no banco de dados
+
 export const createPost = (postText) => {
   firebase
     .firestore()

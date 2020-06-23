@@ -60,19 +60,18 @@ const sendNewProfileImg = (callbackToSetNewImage) => {
   });
 };
 
-const showUrlOfImagesToPubish = (urlFile) => {
+const showUrlOfImagesToPublish = (urlFile) => {
   document.querySelector('#postText').value = `${urlFile}`;
 };
 
 const uploadImage = () => {
   document.querySelector('.publish-img-form-box').style.opacity = 1;
-  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOfImagesToPubish);
+  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish);
 };
 
 const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
 // Função executada com o carregamento da página:
-
 export const generalFeed = () => {
   // Criar elementos gerais da página
   // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
