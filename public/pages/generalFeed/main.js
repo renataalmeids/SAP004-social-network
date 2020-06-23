@@ -164,7 +164,7 @@ const loadPostTemplate = ({
   <footer class='footer-post-box'>
     <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
     <div><img class='post-area-icon' id='like-icon' src="../../assets/like.png" alt="Like Icon"></div>
-    <div class='post-area-icon' id='likes-counter'>${likes}</div>
+    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
