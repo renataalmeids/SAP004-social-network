@@ -1,9 +1,19 @@
-export const example = page => `Eu estou na página ${page}`;
-export const registro = (email, senha) => {
-firebase.auth().createUserWithEmailAndPassword(email, senha).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-    });
-}
+export const signIn = (email, password, onError) => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((result) => {
+      window.location.hash = '#generalFeed';
+      return result;
+    })
+    .catch(error => onError(error));
+};
+
+export const loginWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      window.location.hash = '#generalFeed';
+      return result;
+    }).catch(error => error);
+};
