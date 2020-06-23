@@ -118,7 +118,7 @@ const loadPostTemplate = ({
   </header>
 
   <textarea disabled class='text post-area-text'>${text}</textarea>
-  <div class='save-btn-area display-none''>
+  <div class='save-btn-area display-none'>
     <button class='edit-save-btn' type='button'>Salvar</button>
   </div>
   
