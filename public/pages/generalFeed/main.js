@@ -5,9 +5,8 @@ import {
   editPost,
   deletePost,
   sendImageToDatabase,
+  changeProfileImage,
 } from './data.js';
-
-
 
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
 const setLogOutOnButton = () => {
@@ -21,9 +20,13 @@ const getTextToPublish = () => {
   document.querySelector('#publish-btn').addEventListener('click', () => {
     const text = document.querySelector('#postText').value;
     createPost(text);
+  });
+};
 
-    // fazer um update se o post for uma foto
-    // procurar com search
+const setUserData = () => {
+  firebase.auth().onAuthStateChanged((user) => {
+    document.querySelector('#name-user').innerHTML = user.displayName;
+    document.querySelector('.photo').src = user.photoURL;
   });
 };
 
@@ -41,41 +44,35 @@ const deleteEvent = (postBox, code) => {
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
 
-
-// ---------------
-
-const userName = () => {
-  const promise = new Promise((resolve) => {
-    const name = firebase.auth().currentUser.displayName;
-    resolve(name);
-  });
-  return promise;
+// callback da função changeProfileImage(file,callback)
+const setNewProfileImg = (newfile) => {
+  document.querySelector('.photo').src = newfile;
 };
 
-userName().then((name) => {
-  const getUserName = document.querySelector('#name-user');
-  getUserName.innerHTML = name;
-  return name;
-});
-userName().catch(() => console.log('não deu certo'));
+const sendNewProfileImg = (callbackToSetNewImage) => {
+  document.querySelector('.photo').addEventListener('click', () => {
+    const inputFile = document.querySelector('#input-file-profileImg');
+    inputFile.style.opacity = 1;
+    inputFile.onchange = (event) => {
+      changeProfileImage(event.target.files[0], callbackToSetNewImage);
+      inputFile.style.opacity = 0;
+    };
+  });
+};
 
-
-// Manipulação da publicação de imagens:
-const showUrlOnPublishArea = (urlFile) => {
+const showUrlOfImagesToPubish = (urlFile) => {
   document.querySelector('#postText').value = `${urlFile}`;
 };
 
 const uploadImage = () => {
   document.querySelector('.publish-img-form-box').style.opacity = 1;
-  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOnPublishArea);
+  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOfImagesToPubish);
 };
 
-const listenUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
-
-
-//--------------------------------------------
+const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
 // Função executada com o carregamento da página:
+
 export const generalFeed = () => {
   // Criar elementos gerais da página
   // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
@@ -103,24 +100,26 @@ export const generalFeed = () => {
   <div class='box-feed'>
     <section class='profile-area'>
       <div class='profile-area-theme'></div>
-        <figure><img class='photo'></figure>
+        <figure class='profile-area-photo-box'>
+           <img class='photo'>
+           <input type="file" id="input-file-profileImg" class='input-file-profileImg transparency' accept=".jpg, .jpeg, .png">
+        </figure>
         <div class='name-profile-area'>
-          <h3 id='name-user'>${userName()}</h3>
-          ${console.log(userName())}
+          <h3 id='name-user'></h3>
           <h4>[Descrição]</h4>
         </div>
     </section>
       <div class='share-and-post'>
         <section class='share-area'>
           <textarea id='postText' placeholder='O que você quer compartilhar?'></textarea>
-          <div class='share-area-buttons'>
+           <div class='share-area-buttons'>
             <button id='publish-img-btn' class='circle violet'><img class='icon-circle' src='../../assets/camera.png'></button>
             <div class='publish-img-form-box transparency'>
               <form method="post">
-                <input type="file" id="image_uploads" accept=".jpg, .jpeg, .png">
+                <input type="file" id="image_uploads" class='share-area-img-btn' accept=".jpg, .jpeg, .png">
                </form>
             </div>
-            <button id='publish-btn' class='btn btn-small purple'>Publicar</button>
+            <button id='publish-btn' class='btn btn-small publish-btn purple'>Publicar</button>
           </div>
         </section>
         <section id='post-area' class='posts-container'>
@@ -132,19 +131,29 @@ export const generalFeed = () => {
 
   // Chamada das funções
   setLogOutOnButton();
-  listenUpLoadImgClick();
+  setUserData();
+  sendNewProfileImg(setNewProfileImg);
   getTextToPublish();
+  getUpLoadImgClick();
   readPost(resetPost);
 };
 
 
 // -------------------------------
 
-// Funções auxiliares para edição das postagens chamadas na criação dos posts individuais
+// Funções auxiliares chamadas na criação dos posts individuais (loadPostTemplate)
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
-
 });
+
+const setEditPostClick = (element) => {
+  element.querySelector('.edit-btn').addEventListener('click', () => {
+    element.querySelector('.text').removeAttribute('disabled');
+    element.querySelector('.save-btn-area').classList.remove('display-none');
+    getValuesFromEditedPost(element.querySelector('.edit-save-btn'), element.querySelector('.text'), element.getElementsByTagName('data')[0]);
+  });
+};
+
 
 // Criação dos templates das postagens individuais
 const loadPostTemplate = ({
@@ -178,18 +187,19 @@ const loadPostTemplate = ({
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
-  if (user !== firebase.auth().currentUser.email) {
-    postBox.querySelector('.delete-btn').classList.add('visibility');
-    postBox.querySelector('.edit-btn').classList.add('visibility');
-  }
-  deleteEvent(postBox, code);
   postBox.classList.add('post-area');
   document.querySelector('#post-area').appendChild(postBox);
 
-  // Programando manipulação dos elementos do template na edição das postagens:
-  postBox.querySelector('.edit-btn').addEventListener('click', () => {
-    postBox.querySelector('.text').removeAttribute('disabled');
-    postBox.querySelector('.save-btn-area').classList.remove('display-none');
-    getValuesFromEditedPost(postBox.querySelector('.edit-save-btn'), postBox.querySelector('.text'), postBox.getElementsByTagName('data')[0]);
-  });
+
+  const visibilityOfElementsToCurrentUser = () => {
+    if (user !== firebase.auth().currentUser.email) {
+      postBox.querySelector('.delete-btn').classList.add('visibility');
+      postBox.querySelector('.edit-btn').classList.add('visibility');
+    }
+  };
+
+  // Chamada das funções
+  visibilityOfElementsToCurrentUser();
+  deleteEvent(postBox, code);
+  setEditPostClick(postBox);
 };

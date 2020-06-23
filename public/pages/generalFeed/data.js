@@ -23,17 +23,12 @@ export const createPost = (postText) => {
       user: `${firebase.auth().currentUser.email}`,
       text: postText,
       data: getData(),
-    })
-    .then((doc) => {
-      console.log('Document written with ID: ', doc.id);
-    })
-    .catch((error) => {
-      console.error('Error adding document: ', error);
+      url: '',
     });
 };
 
 
-export const readPost = (showInfosOnTemplate) => {
+export const readPost = (callbackToManipulatePostList) => {
   firebase
     .firestore()
     .collection('posts')
@@ -49,18 +44,16 @@ export const readPost = (showInfosOnTemplate) => {
           code: doc.id,
         });
       });
-      showInfosOnTemplate(post);
+      // a callback é substituída pela função resetPost na chamada da função
+      callbackToManipulatePostList(post);
     });
 };
 
 export const editPost = (newText, postID) => {
-  console.log(postID);
   firebase
     .firestore()
     .collection('posts')
-    .doc(postID).update({ text: newText })
-    .then(() => console.log('Postagem editada com sucesso'))
-    .catch(() => console.log('Ops!Postagem não editada'));
+    .doc(postID).update({ text: newText });
 };
 
 export const deletePost = (id) => {
@@ -71,12 +64,27 @@ export const deletePost = (id) => {
   });
 };
 
-export const sendImageToDatabase = (file, showUrlOnPublishArea) => {
+export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
   const ref = firebase.storage().ref('publishedImages-repository');
   ref.child(file.name).put(file)
-    .then((snapshot) => {
-      console.log('enviei esse snapshot para o bd:', snapshot.metadata.name);
+    .then(() => {
       ref.child(file.name).getDownloadURL()
-        .then(url => showUrlOnPublishArea(url));
+        .then(url => showUrlOfImagesToPubish(url));
     });
-}
+};
+
+export const changeProfileImage = (file, callbackToSetNewImage) => {
+  const ref = firebase.storage().ref('profileImages-repository');
+  ref.child(file.name).put(file)
+    .then((image) => {
+      console.log('enviei esse snapshot para o bd:', image.metadata.name);
+      ref.child(file.name).getDownloadURL()
+        .then((url) => {
+          callbackToSetNewImage(url);
+          firebase.auth().currentUser
+            .updateProfile({
+              photoURL: url,
+            });
+        });
+    });
+};
