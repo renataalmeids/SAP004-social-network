@@ -30,21 +30,12 @@ const setUserData = () => {
   });
 };
 
-const clearPostArea = () => {
-  document.querySelector('#post-area').innerHTML = '';
-};
-
-const resetPost = (postList) => {
-  clearPostArea();
-  postList.forEach(loadPostTemplate);
-};
-
 const deleteEvent = (postBox, code) => {
   const deleteBtn = postBox.querySelector(`button[data-id="${code}"]`);
   deleteBtn.addEventListener('click', () => deletePost(code));
 };
 
-// callback da função changeProfileImage(file,callback)
+
 const setNewProfileImg = (newfile) => {
   document.querySelector('.photo').src = newfile;
 };
@@ -71,10 +62,75 @@ const uploadImage = () => {
 
 const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
+
+// Funções auxiliares chamadas na criação dos posts individuais (loadPostTemplate)
+const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
+  editPost(newText.value, postID.value);
+});
+
+const setEditPostClick = (element) => {
+  element.querySelector('.edit-btn').addEventListener('click', () => {
+    element.querySelector('.text').removeAttribute('disabled');
+    element.querySelector('.save-btn-area').classList.remove('display-none');
+    getValuesFromEditedPost(element.querySelector('.edit-save-btn'), element.querySelector('.text'), element.getElementsByTagName('data')[0]);
+  });
+};
+
+const visibilityOfElementsToCurrentUser = (postBox, user) => {
+  if (user !== firebase.auth().currentUser.email) {
+    postBox.querySelector('.delete-btn').classList.add('visibility');
+    postBox.querySelector('.edit-btn').classList.add('visibility');
+  }
+};
+
+
+// Criação dos templates das postagens individuais
+const loadPostTemplate = (postList) => {
+  document.querySelector('#post-area').innerHTML = '';
+  postList.forEach(({
+    user,
+    data,
+    text,
+    code,
+  }) => {
+    const postBox = document.createElement('div');
+    postBox.innerHTML = `
+  <data value=${code}></data>
+  <header class='title-post-box'>
+    <div>
+      <div>${user}</div>
+      <div>${data}</div>
+    </div>
+    <div>
+      <button class='delete-btn' data-id='${code}'><img class='post-area-icon-del' src="../../assets/quit.png" alt="Edit Icon">
+      </button>
+    </div>
+  </header>
+
+  <textarea disabled class='text post-area-text'>${text}</textarea>
+  <div class='save-btn-area display-none''>
+    <button class='edit-save-btn' type='button'>Salvar</button>
+  </div>
+  
+  <footer class='footer-post-box'>
+    <div><img id='comment-btn' class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
+    <div><img class='post-area-icon' id='like-icon' src="../../assets/like.png" alt="Like Icon"></div>
+    <div class='post-area-icon' id='likes-counter'></div>
+    <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
+  </footer>
+  `;
+    postBox.classList.add('post-area');
+    document.querySelector('#post-area').appendChild(postBox);
+
+    // Chamada das funções
+    visibilityOfElementsToCurrentUser(postBox, user);
+    deleteEvent(postBox, code);
+    setEditPostClick(postBox);
+  });
+};
+
 // Função executada com o carregamento da página:
 export const generalFeed = () => {
-  // Criar elementos gerais da página
-  // Os posts individuais serão criados de forma dinâmica dentro da tag <main #post-area>
   document.querySelector('#root').innerHTML = '';
   const containerFeed = document.createElement('div');
   containerFeed.innerHTML = `
@@ -134,71 +190,5 @@ export const generalFeed = () => {
   sendNewProfileImg(setNewProfileImg);
   getTextToPublish();
   getUpLoadImgClick();
-  readPost(resetPost);
-};
-
-
-// -------------------------------
-
-// Funções auxiliares chamadas na criação dos posts individuais (loadPostTemplate)
-const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
-  editPost(newText.value, postID.value);
-});
-
-const setEditPostClick = (element) => {
-  element.querySelector('.edit-btn').addEventListener('click', () => {
-    element.querySelector('.text').removeAttribute('disabled');
-    element.querySelector('.save-btn-area').classList.remove('display-none');
-    getValuesFromEditedPost(element.querySelector('.edit-save-btn'), element.querySelector('.text'), element.getElementsByTagName('data')[0]);
-  });
-};
-
-
-// Criação dos templates das postagens individuais
-const loadPostTemplate = ({
-  code,
-  user,
-  data,
-  text,
-}) => {
-  const postBox = document.createElement('div');
-  postBox.innerHTML = `
-  <data value=${code}></data>
-  <header class='title-post-box'>
-    <div>
-      <div>${user}</div>
-      <div>${data}</div>
-    </div>
-    <div>
-      <button class='delete-btn' data-id='${code}'><img class='post-area-icon-del' src="../../assets/quit.png" alt="Edit Icon">
-      </button>
-    </div>
-  </header>
-
-  <textarea disabled class='text post-area-text'>${text}</textarea>
-  <div class='save-btn-area display-none''>
-    <button class='edit-save-btn' type='button'>Salvar</button>
-  </div>
-  
-  <footer class='footer-post-box'>
-    <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
-    <div><img class='post-area-icon' src="../../assets/like.png" alt="Like Icon"></div>
-    <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
-  </footer>
-  `;
-  postBox.classList.add('post-area');
-  document.querySelector('#post-area').appendChild(postBox);
-
-
-  const visibilityOfElementsToCurrentUser = () => {
-    if (user !== firebase.auth().currentUser.email) {
-      postBox.querySelector('.delete-btn').classList.add('visibility');
-      postBox.querySelector('.edit-btn').classList.add('visibility');
-    }
-  };
-
-  // Chamada das funções
-  visibilityOfElementsToCurrentUser();
-  deleteEvent(postBox, code);
-  setEditPostClick(postBox);
+  readPost(loadPostTemplate);
 };
