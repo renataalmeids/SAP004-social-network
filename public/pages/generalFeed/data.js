@@ -24,6 +24,7 @@ export const createPost = (postText) => {
       text: postText,
       data: getData(),
       url: '',
+      likes: [],
     });
 };
 
@@ -40,11 +41,11 @@ export const readPost = (callbackToManipulatePostList) => {
           user, data, text, likes,
         } = doc.data();
         post.push({
+          code: doc.id,
           user,
           data,
           text,
           likes,
-          code: doc.id,
         });
       });
       // a callback é substituída pela função resetPost na chamada da função
