@@ -1,4 +1,3 @@
-// Data da publicação:
 const getData = () => {
   const data = new Date();
   return data.toLocaleString();
@@ -14,24 +13,36 @@ export const logOut = () => {
     .catch(error => error);
 };
 
+
 export const createPost = (postText) => {
-  firebase
-    .firestore()
-    .collection('posts')
-    .add({
-      user: `${firebase.auth().currentUser.email}`,
-      text: postText,
-      data: getData(),
-    })
-    .then((doc) => {
-      console.log('Document written with ID: ', doc.id);
-    })
-    .catch((error) => {
-      console.error('Error adding document: ', error);
-    });
+  if (postText.search('https://firebasestorage.googleapis.com') !== -1) {
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        user: `${firebase.auth().currentUser.email}`,
+        text: '',
+        data: getData(),
+        likes: [],
+        comments: [],
+        url: `<img class='post-area-image' src='${postText}'>`,
+      });
+  } else {
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        user: `${firebase.auth().currentUser.email}`,
+        data: getData(),
+        text: postText,
+        likes: [],
+        comments: [],
+        url: '',
+      });
+  }
 };
 
-export const readPost = (callback) => {
+export const readPost = (callbackToManipulatePostList) => {
   firebase
     .firestore()
     .collection('posts')
@@ -39,32 +50,89 @@ export const readPost = (callback) => {
     .onSnapshot((snapshot) => {
       const post = [];
       snapshot.forEach((doc) => {
-        const { user, data, text } = doc.data();
-        post.push({
+        const {
           user,
           data,
           text,
+          likes,
+          comments,
+          url,
+        } = doc.data();
+        post.push({
           code: doc.id,
+          user,
+          data,
+          text,
+          likes,
+          comments,
+          url,
         });
       });
-      callback(post);
+      // a callback é substituída pela função resetPost na chamada da função
+      callbackToManipulatePostList(post);
     });
 };
 
 export const editPost = (newText, postID) => {
-  console.log(postID);
   firebase
     .firestore()
     .collection('posts')
-    .doc(postID).update({ text: newText })
-    .then(() => console.log('Postagem editada com sucesso'))
-    .catch(() => console.log('Ops!Postagem não editada'));
+    .doc(postID).update({ text: newText });
 };
 
 export const deletePost = (id) => {
-  firebase.firestore().collection('posts').doc(id).delete().then(function() {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
+  firebase.firestore().collection('posts').doc(id).delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch((error) => {
+      console.error('Error removing document: ', error);
+    });
+};
+
+export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
+  const ref = firebase.storage().ref('publishedImages-repository');
+  ref.child(file.name).put(file)
+    .then(() => {
+      ref.child(file.name).getDownloadURL()
+        .then(url => showUrlOfImagesToPubish(url));
+    });
+};
+
+export const changeProfileImage = (file, callbackToSetNewImage) => {
+  const ref = firebase.storage().ref('profileImages-repository');
+  ref.child(file.name).put(file)
+    .then((image) => {
+      console.log('enviei esse snapshot para o bd:', image.metadata.name);
+      ref.child(file.name).getDownloadURL()
+        .then((url) => {
+          callbackToSetNewImage(url);
+          firebase.auth().currentUser
+            .updateProfile({
+              photoURL: url,
+            });
+        });
+    });
+};
+
+export const likePosts = (postID) => {
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .update({ likes: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid) });
+};
+
+export const commentPosts = (postID, textContent) => {
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .update({
+      comments: firebase.firestore.FieldValue.arrayUnion({
+        uid: firebase.auth().currentUser.uid,
+        name: firebase.auth().currentUser.displayName,
+        text: textContent,
+      }),
     });
 };

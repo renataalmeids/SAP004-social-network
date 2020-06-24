@@ -3,10 +3,7 @@ import { signIn, loginWithGoogle } from './data.js';
 import { errorCodes } from '../constants.js';
 
 export const home = () => {
-  // Esconder cabeçalho da página
-  document.getElementsByTagName('header')[0].style.display = 'none';
-
-  // Template
+  // Template da página de login
   const main = document.getElementById('root');
   main.innerHTML = '';
   const containerLogin = document.createElement('div');

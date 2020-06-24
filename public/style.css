@@ -35,13 +35,13 @@
     font-family: 'Nova Slim', cursive;
   }
   
-  input {                         
+  input {
     color: black;
     border: none;
     width: 100%;
   }
   
-  .box {                             
+  .box {
     padding: 50px;
     margin: 0px auto;
     display: flex;
@@ -50,7 +50,7 @@
     text-align: center;
   }
   
-  .btn {                               
+  .btn {
     border: solid #9a55a6;
     width: 150px;
     border-radius: 20px;
@@ -62,17 +62,21 @@
     opacity: 0.7;
   }
   
-  .btn-small {                  
+  .btn-small {
     width: 100px;
     padding: 2px;
     color: white;
     font-weight: bold;
   }
   
-  .button-area {                  
+  .button-area {
     margin: 8px auto;
     background-color: #9a55a6;
     color: white;
+  }
+  
+  .publish-btn {
+    width: 150px;
   }
   
   .icon-large {
@@ -80,7 +84,7 @@
     height: 150px;
   }
   
-  .font-small {                  
+  .font-small {
     font-size: 0.8em;
   }
   
@@ -104,7 +108,7 @@
     padding-bottom: 5px;
   }
   
-  .slogan-desktop {
+  .slogan-desktop, .display-none {
     display: none;
   }
   /*Feed Geral*/
@@ -118,7 +122,27 @@
     margin-bottom: 20px;
   }
   
-  .circle {
+  .share-area{                      
+    padding: 20px;
+    margin: 10px 30px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+  }
+  
+  .post-area,
+  .share-area textarea {       
+    padding: 10px;
+    margin: 10px 30px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+  }
+  
+  .share-area,
+  .post-area {
+    height: fit-content;
+  }
+  
+    .circle {
     width: 30px;
     height: 30px;
     border: none;
@@ -153,22 +177,26 @@
     text-align: center;
   }
   
+  .profile-area-photo-box {
+    width: 83px;
+    overflow: hidden;
+  }
+  
   .photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: black;
+    width: 63px;
+    height: 63px;
+    border-radius: 34px;
+    border: 1px solid black;
   }
   
-  .share-area{                      
-    padding: 20px;
-    margin: 10px 30px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
+  .photo:hover {
+    opacity: 0.5;
+    cursor: pointer;
   }
   
+  .share-area,
   .post-area,
-  .share-area textarea {       
+  .share-area textarea {
     padding: 10px;
     margin: 10px 30px;
     border: 1px solid lightgrey;
@@ -181,10 +209,10 @@
     flex-direction: column;
   }
   
-  .share-area textarea {                          
+  .share-area textarea {
     margin: 0px;
     width: 100%;
-    height: 100px;
+    height: 80px;
     margin-bottom: 15px;
   }
   
@@ -195,9 +223,15 @@
     width: 100%;
   }
   
-  .post-area {                    
-    padding: 0px;                
-    margin-top: 30px;
+  .share-area-img-btn {
+    width: 80%;
+    padding-top: 0px;
+    margin-left: 10px;
+  }
+  
+  .post-area {
+    padding: 0px;
+    margin-top: 15px;
   }
   
   .title-post-box,
@@ -212,39 +246,44 @@
   }
   
   .title-post-box {
-    font-size: 14px;
+    font-size: 0.8em;
     background-color: lightgray;
     display: flex;
     justify-content: space-between;
   }
   
   .title-post-box div:nth-child(2) {
-    font-size: 12px;
+    font-size: 0.7em;
     margin-top: 3px;
   }
   
-  .post-area-text {                         
+  .post-area-text {
     font-family: Arial, Helvetica, sans-serif;
     height: 60px;
-    padding: 40px;
+    padding: 10px;
     border: none;
-    word-break: break-all;
   }
   
-  .post-area-icon {       
+  .post-area-image {
+    width: 70%;
+    height: 100%;
+    margin: 1% 15%;
+  }
+  
+  .post-area-icon {
     height: 18px;
     width: 18px;
   }
   
-  .post-area-icon {       
-    margin-right: 50px;
+  .post-area-icon {
+    margin-right: 10px;
   }
   
-  .post-area-icon:hover {     
+  .post-area-icon:hover {
     opacity: 0.6;
   }
   
-  .delete-btn {               
+  .delete-btn {
     border: none;
     outline: none;
     background-color: transparent;
@@ -265,6 +304,10 @@
     justify-content: flex-end;
     padding-right: 40px;
     padding-bottom: 7px;
+  }
+
+  .transparency {
+  opacity: 0; 
   }
   
   .visibility {
@@ -308,8 +351,16 @@
       height: 716px;
     }
   }
-  /*Feed geral*/
+  /*Responsividade: versão laptop*/
+  /*Tela de login*/
   
+  @media only screen and (min-width: 700px) {
+    .post-area-image {
+      width: 40%;
+      height: 60%;
+      margin: 1% 30%;
+    }
+  }
   @media only screen and (min-width: 1024px) {
     .profile-area {
       flex-direction: column;
@@ -338,5 +389,37 @@
     }
     .share-and-post {
       width: 60%;
+    }
+    .profile-area-photo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+      padding-top: 0px;
+    }
+    .slogan-desktop {
+      display: block;
+    }
+    .box {
+      flex-direction: row;
+      height: 600px;
+    }
+    .box-item {
+      width: 50%;
+    }
+    .icon-large {
+      width: 60%;
+      height: 40%;
+    }
+    .login-area {
+      width: 55%;
+    }
+    .button-area {
+      width: 35%;
+    }
+    .post-area-image {
+      margin: 0px;
+      width: 70%;
+      margin: 1% 15%;
     }
   }
