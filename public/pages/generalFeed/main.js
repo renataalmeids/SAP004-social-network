@@ -121,7 +121,7 @@ const loadPostTemplate = (postList) => {
     <div class='post-area-icon' id='likes-counter'>${likes.length}</div>  
     <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon">${comments.length}</div>
     ${comments.length > 0 && comments.map(comment => `
-    <div>
+    <div class='comments-box'>
      <p>${comment.name}</p>
      <p>${comment.text}</p>
      </div>
