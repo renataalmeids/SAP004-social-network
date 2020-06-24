@@ -290,35 +290,8 @@
   @media only screen and (min-width: 700px) {
     .post-area-image {
       width: 80%;
-      height: 350px;
+      height: 300px;
       margin: 1% 10%;
-    }
-  }
-  
-  @media only screen and (min-width: 1024px) {
-    .slogan-desktop {
-      display: block;
-    }
-    .box {
-      flex-direction: row;
-      height: 600px;
-    }
-    .box-item {
-      width: 50%;
-    }
-    .icon-large {
-      width: 60%;
-      height: 40%;
-    }
-    .login-area {
-      width: 55%;
-    }
-    .button-area {
-      width: 35%;
-    }
-    .post-area-image {
-      width: 100%;
-      height: 350px;
     }
   }
   
@@ -357,5 +330,30 @@
       align-items: center;
       width: 80%;
       padding-top: 0px;
+    }
+    .slogan-desktop {
+      display: block;
+    }
+    .box {
+      flex-direction: row;
+      height: 600px;
+    }
+    .box-item {
+      width: 50%;
+    }
+    .icon-large {
+      width: 60%;
+      height: 40%;
+    }
+    .login-area {
+      width: 55%;
+    }
+    .button-area {
+      width: 35%;
+    }
+    .post-area-image {
+      margin: 0px;
+      width: 100%;
+      height: 300px;
     }
   }
