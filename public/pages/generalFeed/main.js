@@ -57,11 +57,17 @@ const sendNewProfileImg = (callbackToSetNewImage) => {
 
 const showUrlOfImagesToPublish = (urlFile) => {
   document.querySelector('#postText').value = `${urlFile}`;
+  document.querySelector('#postText').placeholder = 'O que você quer compartilhar?';
+
 };
 
 const uploadImage = () => {
   document.querySelector('.publish-img-form-box').style.opacity = 1;
-  document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish);
+  document.querySelector('#image_uploads').onchange = event => {
+    sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish)
+    document.querySelector('.publish-img-form-box').style.opacity = 0;
+    document.querySelector('#postText').placeholder = 'Aguarde enquanto sua foto é carregada...';
+  };
 };
 
 const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
