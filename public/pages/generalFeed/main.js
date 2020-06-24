@@ -20,8 +20,8 @@ const setLogOutOnButton = () => {
 
 const getTextToPublish = () => {
   document.querySelector('#publish-btn').addEventListener('click', () => {
-    const text = document.querySelector('#postText').value;
-    createPost(text);
+    createPost(document.querySelector('#postText').value);
+    document.querySelector('#postText').value = '';
   });
 };
 

@@ -336,6 +336,22 @@ input {
     height: 50%;
     margin-bottom: 10px;
   }
+  
+  .share-area{                      
+    padding: 20px;
+    margin: 10px 30px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+  }
+  
+  .post-area,
+  .share-area textarea {       
+    padding: 10px;
+    margin: 10px 30px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+  }
+  
   .share-area,
   .post-area {
     height: fit-content;
@@ -355,5 +371,103 @@ input {
     align-items: center;
     width: 80%;
     padding-top: 0px;
+    border-top: 1px solid lightgray;
+  }
+  
+  .title-post-box {
+    font-size: 14px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .title-post-box div:nth-child(2) {
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  
+  .post-area-text {                         
+    font-family: Arial, Helvetica, sans-serif;
+    height: 60px;
+    padding: 40px;
+    border: none;
+    word-break: break-all;
+  }
+  
+  .post-area-icon {       
+    height: 18px;
+    width: 18px;
+  }
+  
+  .post-area-icon {       
+    margin-right: 50px;
+  }
+  
+  .post-area-icon:hover {     
+    opacity: 0.6;
+  }
+  
+  .delete-btn {               
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+  
+  .post-area-icon-del:hover {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .display-none {               
+    display: none;
+  }
+
+  .save-btn-area {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+    padding-bottom: 7px;
+  }
+  
+  .visibility {
+    visibility: hidden;
+  }
+
+  footer {
+    color: black;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 20px;
+  }
+  /*Responsividade: versão laptop*/
+  /*Tela de login*/
+  
+  @media only screen and (min-width: 1024px) {
+    .slogan-desktop {
+      display: block;
+    }
+    .box {
+      flex-direction: row;
+      height: 600px;
+    }
+    .box-item {
+      width: 50%;
+    }
+    .icon-large {
+      width: 60%;
+      height: 40%;
+    }
+    .login-area {
+      width: 55%;
+    }
+    .button-area {
+      width: 35%;
+    }
+  }
+  
+  @media only screen and (min-width: 1440px) {
+    .box {
+      height: 716px;
+    }
   }
 }
