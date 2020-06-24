@@ -16,7 +16,6 @@ export const logOut = () => {
 
 export const createPost = (postText) => {
   if (postText.search('https://firebasestorage.googleapis.com') !== -1) {
-    console.log('estou enviando uma imagem');
     firebase
       .firestore()
       .collection('posts')
@@ -28,7 +27,6 @@ export const createPost = (postText) => {
         url: `<img class='post-area-image' src='${postText}'>`,
       });
   } else {
-    console.log('estou enviando um texto');
     firebase
       .firestore()
       .collection('posts')
@@ -39,7 +37,7 @@ export const createPost = (postText) => {
         likes: [],
         url: '',
       });
-  };
+  }
 };
 
 export const readPost = (callbackToManipulatePostList) => {
@@ -50,7 +48,13 @@ export const readPost = (callbackToManipulatePostList) => {
     .onSnapshot((snapshot) => {
       const post = [];
       snapshot.forEach((doc) => {
-        const { user, data, text, likes, url } = doc.data();
+        const {
+          user,
+          data,
+          text,
+          likes,
+          url,
+        } = doc.data();
         post.push({
           user,
           data,

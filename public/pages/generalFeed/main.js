@@ -9,6 +9,8 @@ import {
 } from './data.js';
 
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
+
+
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -59,6 +61,12 @@ const uploadImage = () => {
   document.querySelector('.publish-img-form-box').style.opacity = 1;
   document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish);
 };
+
+
+const loaderUpload = () => {
+  document.querySelector('#postText').style.display = 'none';
+
+}
 
 const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
