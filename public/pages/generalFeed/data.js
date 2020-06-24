@@ -24,6 +24,7 @@ export const createPost = (postText) => {
       data: getData(),
       url: '',
       likes: [],
+      comments: [],
     });
 };
 
@@ -37,7 +38,7 @@ export const readPost = (callbackToManipulatePostList) => {
       const post = [];
       snapshot.forEach((doc) => {
         const {
-          user, data, text, likes,
+          user, data, text, likes, comments,
         } = doc.data();
         post.push({
           code: doc.id,
@@ -45,6 +46,7 @@ export const readPost = (callbackToManipulatePostList) => {
           data,
           text,
           likes,
+          comments,
         });
       });
       // a callback é substituída pela função resetPost na chamada da função
@@ -102,17 +104,16 @@ export const likePosts = (postID) => {
     .update({ likes: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid) });
 };
 
-/* export const commentPosts = (postID, textContent) => {
+export const commentPosts = (postID, textContent) => {
   firebase
     .firestore()
     .collection('posts')
     .doc(postID)
     .update({
-      comment: {
+      comments: firebase.firestore.FieldValue.arrayUnion({
         uid: firebase.auth().currentUser.uid,
         name: firebase.auth().currentUser.displayName,
         text: textContent,
-      },
+      }),
     });
 };
- */

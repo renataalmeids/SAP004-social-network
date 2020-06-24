@@ -7,6 +7,7 @@ import {
   sendImageToDatabase,
   likePosts,
   changeProfileImage,
+  commentPosts,
 } from './data.js';
 
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
@@ -94,6 +95,7 @@ const loadPostTemplate = (postList) => {
     data,
     text,
     likes,
+    comments,
   }) => {
     const postBox = document.createElement('div');
     postBox.innerHTML = `
@@ -115,13 +117,20 @@ const loadPostTemplate = (postList) => {
   </div>
   
   <footer class='footer-post-box'>
-    <div><img id='comment-btn' class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
-    <div><img class='post-area-icon' id='like-icon' src="../../assets/like.png" alt="Like Icon"></div>
-    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>
+     <div><img class='post-area-icon' id="like-icon" src="../../assets/like.png" alt="Like Icon"></div>
+    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>  
+    <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon">${comments}</div>
+    ${comments.forEach(({ name, textComment }) => `<div>
+      <p>${name}</p>
+      <p>${textComment}</p>
+      </div>`)}
+    <textarea id="text-comment"></textarea>
+    <button id="send-comment">Comentar</button>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
-
+    console.log(comments);
+    postBox.querySelector('#send-comment').addEventListener('click', () => commentPosts(code, postBox.querySelector('#text-comment').value));
     postBox.querySelector('#like-icon').addEventListener('click', () => likePosts(code));
 
     postBox.classList.add('post-area');
