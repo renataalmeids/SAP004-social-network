@@ -58,13 +58,12 @@ const sendNewProfileImg = (callbackToSetNewImage) => {
 const showUrlOfImagesToPublish = (urlFile) => {
   document.querySelector('#postText').value = `${urlFile}`;
   document.querySelector('#postText').placeholder = 'O que você quer compartilhar?';
-
 };
 
 const uploadImage = () => {
   document.querySelector('.publish-img-form-box').style.opacity = 1;
-  document.querySelector('#image_uploads').onchange = event => {
-    sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish)
+  document.querySelector('#image_uploads').onchange = (event) => {
+    sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish);
     document.querySelector('.publish-img-form-box').style.opacity = 0;
     document.querySelector('#postText').placeholder = 'Aguarde enquanto sua foto é carregada...';
   };
@@ -93,21 +92,20 @@ const visibilityOfElementsToCurrentUser = (postBox, user) => {
   }
 };
 
-
 // Criação dos templates das postagens individuais
 const loadPostTemplate = (postList) => {
-    document.querySelector('#post-area').innerHTML = '';
-    postList.forEach(({
-          code,
-          user,
-          data,
-          text,
-          likes,
-          comments,
-          url,
-        }) => {
-          const postBox = document.createElement('div');
-          postBox.innerHTML = `
+  document.querySelector('#post-area').innerHTML = '';
+  postList.forEach(({
+    code,
+    user,
+    data,
+    text,
+    likes,
+    comments,
+    url,
+  }) => {
+    const postBox = document.createElement('div');
+    postBox.innerHTML = `
   <data value=${code}></data>
   <header class='title-post-box'>
     <div>
@@ -130,12 +128,12 @@ const loadPostTemplate = (postList) => {
      <div><img class='post-area-icon' id="like-icon" src="../../assets/like.png" alt="Like Icon"></div>
     <div class='post-area-icon' id='likes-counter'>${likes.length}</div>  
     <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon">${comments.length}</div>
-    ${comments.length > 0 && comments.map(comment => `
+    ${(comments.length > 0 && comments.map(comment => `
     <div class='comments-box'>
      <p>${comment.name}</p>
      <p>${comment.text}</p>
      </div>
-     `)}
+     `)) || ''}
     <textarea id="text-comment"></textarea>
     <button id="send-comment">Comentar</button>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
