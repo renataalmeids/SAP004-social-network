@@ -63,11 +63,6 @@ const uploadImage = () => {
 };
 
 
-const loaderUpload = () => {
-  document.querySelector('#postText').style.display = 'none';
-
-}
-
 const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
 
