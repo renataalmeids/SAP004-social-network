@@ -91,6 +91,7 @@ const loadPostTemplate = (postList) => {
     user,
     data,
     text,
+    url,
     code,
   }) => {
     const postBox = document.createElement('div');
@@ -108,6 +109,7 @@ const loadPostTemplate = (postList) => {
   </header>
 
   <textarea disabled class='text post-area-text'>${text}</textarea>
+  <img class='post-area-image' src="${url}">
   <div class='save-btn-area display-none''>
     <button class='edit-save-btn' type='button'>Salvar</button>
   </div>

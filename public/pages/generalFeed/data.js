@@ -15,18 +15,32 @@ export const logOut = () => {
 
 
 export const createPost = (postText) => {
-  firebase
-    .firestore()
-    .collection('posts')
-    .add({
-      user: `${firebase.auth().currentUser.email}`,
-      text: postText,
-      data: getData(),
-      likes: [],
-      url: '',
-    });
+  if (postText.search('https://firebasestorage.googleapis.com') !== -1) {
+    console.log('estou enviando uma imagem');
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        user: `${firebase.auth().currentUser.email}`,
+        text: '',
+        data: getData(),
+        likes: [],
+        url: postText,
+      });
+  } else {
+    console.log('estou enviando um texto');
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        user: `${firebase.auth().currentUser.email}`,
+        text: postText,
+        data: getData(),
+        likes: [],
+        url: '',
+      });
+  };
 };
-
 
 export const readPost = (callbackToManipulatePostList) => {
   firebase
@@ -36,13 +50,14 @@ export const readPost = (callbackToManipulatePostList) => {
     .onSnapshot((snapshot) => {
       const post = [];
       snapshot.forEach((doc) => {
-        const { user, data, text, likes } = doc.data();
+        const { user, data, text, likes, url } = doc.data();
         post.push({
           user,
           data,
           text,
           code: doc.id,
           likes,
+          url,
         });
       });
       // a callback é substituída pela função resetPost na chamada da função
