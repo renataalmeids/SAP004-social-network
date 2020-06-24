@@ -412,4 +412,157 @@ footer {
     width: 70%;
     margin: 1% 15%;
   }
-}
+  
+  .post-area-icon {
+    height: 18px;
+    width: 18px;
+  }
+  
+  .post-area-icon {
+    margin-right: 10px;
+  }
+  
+  .post-area-icon:hover {
+    opacity: 0.6;
+  }
+  
+  .delete-btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+  
+  .post-area-icon-del:hover {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .save-btn-area 
+  .display-none {               
+    display: none;
+  }
+
+  .save-btn-area {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+    padding-bottom: 7px;
+  }
+
+  .transparency {
+  opacity: 0; 
+  }
+  
+  .visibility {
+    visibility: hidden;
+  }
+
+  footer {
+    color: black;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 20px;
+  }
+  /*Responsividade: versão laptop*/
+  /*Tela de login*/
+  
+  @media only screen and (min-width: 1024px) {
+    .slogan-desktop {
+      display: block;
+    }
+    .box {
+      flex-direction: row;
+      height: 600px;
+    }
+    .box-item {
+      width: 50%;
+    }
+    .icon-large {
+      width: 60%;
+      height: 40%;
+    }
+    .login-area {
+      width: 55%;
+    }
+    .button-area {
+      width: 35%;
+    }
+  }
+  
+  @media only screen and (min-width: 1440px) {
+    .box {
+      height: 716px;
+    }
+  }
+  /*Responsividade: versão laptop*/
+  /*Tela de login*/
+  
+  @media only screen and (min-width: 700px) {
+    .post-area-image {
+      width: 40%;
+      height: 60%;
+      margin: 1% 30%;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    .profile-area {
+      flex-direction: column;
+      height: 285px;
+      border: 2px solid gray;
+      border-radius: 4px;
+      width: 40%;
+      margin-top: 10px;
+      padding: 0px;
+    }
+    .profile-area-theme {
+      background-color: lightgray;
+      width: 100%;
+      height: 50%;
+      margin-bottom: 10px;
+    }
+    .share-area,
+    .post-area {
+      height: fit-content;
+    }
+    .box-feed {
+      display: flex;
+      flex-direction: row;
+      width: 65%;
+      margin: auto;
+    }
+    .share-and-post {
+      width: 60%;
+    }
+    .profile-area-photo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+      padding-top: 0px;
+    }
+    .slogan-desktop {
+      display: block;
+    }
+    .box {
+      flex-direction: row;
+      height: 600px;
+    }
+    .box-item {
+      width: 50%;
+    }
+    .icon-large {
+      width: 60%;
+      height: 40%;
+    }
+    .login-area {
+      width: 55%;
+    }
+    .button-area {
+      width: 35%;
+    }
+    .post-area-image {
+      margin: 0px;
+      width: 70%;
+      margin: 1% 15%;
+    }
+  }
