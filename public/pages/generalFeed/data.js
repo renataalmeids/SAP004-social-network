@@ -25,7 +25,7 @@ export const createPost = (postText) => {
         text: '',
         data: getData(),
         likes: [],
-        url: postText,
+        url: `<img class='post-area-image' src='${postText}'>`,
       });
   } else {
     console.log('estou enviando um texto');

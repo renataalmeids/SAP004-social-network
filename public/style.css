@@ -244,9 +244,9 @@
   }
   
   .post-area-image {
-    width: 85%;
-    height: 200px;
-    margin: 10px auto;
+    width: 100%;
+    height: 150px;
+    margin: 5px auto;
   }
   
   .post-area-icon {
@@ -289,8 +289,9 @@
   
   @media only screen and (min-width: 700px) {
     .post-area-image {
-      width: 50%;
+      width: 80%;
       height: 350px;
+      margin: 1% 10%;
     }
   }
   
@@ -316,17 +317,10 @@
       width: 35%;
     }
     .post-area-image {
-      width: 90%;
+      width: 100%;
       height: 350px;
     }
   }
-  
-  @media only screen and (min-width: 1440px) {
-    .box {
-      height: 716px;
-    }
-  }
-  /*Feed geral*/
   
   @media only screen and (min-width: 1024px) {
     .profile-area {

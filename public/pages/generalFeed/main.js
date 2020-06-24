@@ -109,7 +109,7 @@ const loadPostTemplate = (postList) => {
   </header>
 
   <textarea disabled class='text post-area-text'>${text}</textarea>
-  <img class='post-area-image' src="${url}">
+  <div>${url}<div>
   <div class='save-btn-area display-none''>
     <button class='edit-save-btn' type='button'>Salvar</button>
   </div>
