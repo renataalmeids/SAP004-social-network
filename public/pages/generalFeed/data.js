@@ -15,19 +15,32 @@ export const logOut = () => {
 
 
 export const createPost = (postText) => {
-  firebase
-    .firestore()
-    .collection('posts')
-    .add({
-      user: `${firebase.auth().currentUser.email}`,
-      text: postText,
-      data: getData(),
-      url: '',
-      likes: [],
-      comments: [],
-    });
+  if (postText.search('https://firebasestorage.googleapis.com') !== -1) {
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        user: `${firebase.auth().currentUser.email}`,
+        text: '',
+        data: getData(),
+        likes: [],
+        comments: [],
+        url: `<img class='post-area-image' src='${postText}'>`,
+      });
+  } else {
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        user: `${firebase.auth().currentUser.email}`,
+        data: getData(),
+        text: postText,
+        likes: [],
+        comments: [],
+        url: '',
+      });
+  }
 };
-
 
 export const readPost = (callbackToManipulatePostList) => {
   firebase
@@ -38,7 +51,12 @@ export const readPost = (callbackToManipulatePostList) => {
       const post = [];
       snapshot.forEach((doc) => {
         const {
-          user, data, text, likes, comments,
+          user,
+          data,
+          text,
+          likes,
+          comments,
+          url,
         } = doc.data();
         post.push({
           code: doc.id,
@@ -47,6 +65,7 @@ export const readPost = (callbackToManipulatePostList) => {
           text,
           likes,
           comments,
+          url,
         });
       });
       // a callback é substituída pela função resetPost na chamada da função
