@@ -24,6 +24,7 @@ export const createPost = (postText) => {
         text: '',
         data: getData(),
         likes: [],
+        comments: [],
         url: `<img class='post-area-image' src='${postText}'>`,
       });
   } else {
@@ -32,9 +33,10 @@ export const createPost = (postText) => {
       .collection('posts')
       .add({
         user: `${firebase.auth().currentUser.email}`,
-        text: postText,
         data: getData(),
+        text: postText,
         likes: [],
+        comments: [],
         url: '',
       });
   }
@@ -53,14 +55,16 @@ export const readPost = (callbackToManipulatePostList) => {
           data,
           text,
           likes,
+          comments,
           url,
         } = doc.data();
         post.push({
+          code: doc.id,
           user,
           data,
           text,
-          code: doc.id,
           likes,
+          comments,
           url,
         });
       });
@@ -77,11 +81,13 @@ export const editPost = (newText, postID) => {
 };
 
 export const deletePost = (id) => {
-  firebase.firestore().collection('posts').doc(id).delete().then(function () {
-    console.log("Document successfully deleted!");
-  }).catch(function (error) {
-    console.error("Error removing document: ", error);
-  });
+  firebase.firestore().collection('posts').doc(id).delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch((error) => {
+      console.error('Error removing document: ', error);
+    });
 };
 
 export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
@@ -106,5 +112,27 @@ export const changeProfileImage = (file, callbackToSetNewImage) => {
               photoURL: url,
             });
         });
+    });
+};
+
+export const likePosts = (postID) => {
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .update({ likes: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid) });
+};
+
+export const commentPosts = (postID, textContent) => {
+  firebase
+    .firestore()
+    .collection('posts')
+    .doc(postID)
+    .update({
+      comments: firebase.firestore.FieldValue.arrayUnion({
+        uid: firebase.auth().currentUser.uid,
+        name: firebase.auth().currentUser.displayName,
+        text: textContent,
+      }),
     });
 };

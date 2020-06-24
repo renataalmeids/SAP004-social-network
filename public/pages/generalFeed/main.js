@@ -5,7 +5,9 @@ import {
   editPost,
   deletePost,
   sendImageToDatabase,
+  likePosts,
   changeProfileImage,
+  commentPosts,
 } from './data.js';
 
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
@@ -20,8 +22,8 @@ const setLogOutOnButton = () => {
 
 const getTextToPublish = () => {
   document.querySelector('#publish-btn').addEventListener('click', () => {
-    const text = document.querySelector('#postText').value;
-    createPost(text);
+    createPost(document.querySelector('#postText').value);
+    document.querySelector('#postText').value = '';
   });
 };
 
@@ -62,7 +64,6 @@ const uploadImage = () => {
   document.querySelector('#image_uploads').onchange = event => sendImageToDatabase(event.target.files[0], showUrlOfImagesToPublish);
 };
 
-
 const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEventListener('click', uploadImage);
 
 
@@ -89,16 +90,18 @@ const visibilityOfElementsToCurrentUser = (postBox, user) => {
 
 // Criação dos templates das postagens individuais
 const loadPostTemplate = (postList) => {
-  document.querySelector('#post-area').innerHTML = '';
-  postList.forEach(({
-    user,
-    data,
-    text,
-    url,
-    code,
-  }) => {
-    const postBox = document.createElement('div');
-    postBox.innerHTML = `
+    document.querySelector('#post-area').innerHTML = '';
+    postList.forEach(({
+          code,
+          user,
+          data,
+          text,
+          likes,
+          comments,
+          url,
+        }) => {
+          const postBox = document.createElement('div');
+          postBox.innerHTML = `
   <data value=${code}></data>
   <header class='title-post-box'>
     <div>
@@ -113,17 +116,29 @@ const loadPostTemplate = (postList) => {
 
   <textarea disabled class='text post-area-text'>${text}</textarea>
   <div>${url}<div>
-  <div class='save-btn-area display-none''>
+  <div class='save-btn-area display-none'>
     <button class='edit-save-btn' type='button'>Salvar</button>
   </div>
   
   <footer class='footer-post-box'>
-    <div><img id='comment-btn' class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon"></div>
-    <div><img class='post-area-icon' id='like-icon' src="../../assets/like.png" alt="Like Icon"></div>
-    <div class='post-area-icon' id='likes-counter'></div>
+     <div><img class='post-area-icon' id="like-icon" src="../../assets/like.png" alt="Like Icon"></div>
+    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>  
+    <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon">${comments.length}</div>
+    ${comments.length > 0 && comments.map(comment => `
+    <div class='comments-box'>
+     <p>${comment.name}</p>
+     <p>${comment.text}</p>
+     </div>
+     `)}
+    <textarea id="text-comment"></textarea>
+    <button id="send-comment">Comentar</button>
     <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
   </footer>
   `;
+
+    postBox.querySelector('#send-comment').addEventListener('click', () => commentPosts(code, postBox.querySelector('#text-comment').value));
+    postBox.querySelector('#like-icon').addEventListener('click', () => likePosts(code));
+
     postBox.classList.add('post-area');
     document.querySelector('#post-area').appendChild(postBox);
 
