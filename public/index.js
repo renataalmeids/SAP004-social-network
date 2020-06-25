@@ -7,21 +7,12 @@ import { signUp } from './pages/signUp/main.js';
 const init = () => {
   window.addEventListener('hashchange', () => {
     switch (window.location.hash) {
-      // case '#login':
-      //   home();
-      //   break;
       case '#signup':
         signUp();
         break;
-        // case '#personalFeed':
-        //   personalFeed();
-        // break;
       case '#generalFeed':
         generalFeed();
         break;
-        // case '#configurations':
-        //   configurations();
-        //   break;
       default:
         home();
     }
