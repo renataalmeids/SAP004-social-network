@@ -75,6 +75,7 @@ const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEv
 // Funções auxiliares chamadas na criação dos posts individuais (loadPostTemplate)
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
+
 });
 
 const setEditPostClick = (element) => {
@@ -94,18 +95,18 @@ const visibilityOfElementsToCurrentUser = (postBox, user) => {
 
 // Criação dos templates das postagens individuais
 const loadPostTemplate = (postList) => {
-  document.querySelector('#post-area').innerHTML = '';
-  postList.forEach(({
-    code,
-    user,
-    data,
-    text,
-    likes,
-    comments,
-    url,
-  }) => {
-    const postBox = document.createElement('div');
-    postBox.innerHTML = `
+    document.querySelector('#post-area').innerHTML = '';
+    postList.forEach(({
+          code,
+          user,
+          data,
+          text,
+          likes,
+          comments,
+          url,
+        }) => {
+          const postBox = document.createElement('div');
+          postBox.innerHTML = `
   <data value=${code}></data>
   <header class='title-post-box'>
     <div>
@@ -125,18 +126,32 @@ const loadPostTemplate = (postList) => {
   </div>
   
   <footer class='footer-post-box'>
-     <div><img class='post-area-icon' id="like-icon" src="../../assets/like.png" alt="Like Icon"></div>
-    <div class='post-area-icon' id='likes-counter'>${likes.length}</div>  
-    <div><img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon">${comments.length}</div>
+    <section class='footer-post-icons-box'>
+      <div class='footer-post-icons-items'>
+        <img class='post-area-icon' id="like-icon" src="../../assets/like.png" alt="Like Icon">
+        <div id='likes-counter'>${likes.length}</div> 
+      </div>
+       
+      <div class='footer-post-icons-items'>
+        <img class='post-area-icon' src="../../assets/comments.png" alt="Comments Icon">
+        <div>${comments.length}</div>
+      </div>
+      
+      <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
+    </section>
+
+    <section class='footer-post-comments-box'>
+    <div class='comments-box comments-box-textarea'>
+      <textarea placeholder='Deixe seu comentário' id="text-comment"></textarea>
+      <br><button id="send-comment">Enviar</button>
+    </div>
     ${(comments.length > 0 && comments.map(comment => `
     <div class='comments-box'>
-     <p>${comment.name}</p>
+     <p class='comments-box-name'>${comment.name}</p>
      <p>${comment.text}</p>
-     </div>
+    </div>
      `)) || ''}
-    <textarea id="text-comment"></textarea>
-    <button id="send-comment">Comentar</button>
-    <div class='edit-btn'><img class='post-area-icon' src="../../assets/pencil.png" alt="Edit Icon"></div>
+    </section>
   </footer>
   `;
 
@@ -167,7 +182,6 @@ export const generalFeed = () => {
       </div>
       <figure class='navbar-page-item-logo'>
         <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
-        <span>Rainbow!</span>
       </figure>
       <div>
         <button class='circle signOut yellow'>
@@ -178,7 +192,7 @@ export const generalFeed = () => {
   </header>
   <div class='box-feed'>
     <section class='profile-area'>
-      <div class='profile-area-theme'></div>
+      <div class='profile-area-theme'><img class='theme-image' src='../../assets/capa.jpg'></div>
         <figure class='profile-area-photo-box'>
            <img class='photo'>
            <input type="file" id="input-file-profileImg" class='input-file-profileImg transparency' accept=".jpg, .jpeg, .png">
