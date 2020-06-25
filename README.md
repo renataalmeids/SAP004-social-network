@@ -66,7 +66,9 @@ Além disso, o usuário também consegue alterar sua foto de perfil quando logad
 ### Desenvolvido por
 
 [Nathalia Monalisa](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fgithub.com%2Fnmonalisa)
+
 [Renata Almeida](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fgithub.com%2Frenataalmeids%2F)
+
 [Thalita Gonçalves](https://github.com/thalitagoncalves/)
 
 #### O projeto foi proposto no Bootcamp @Laboratoria.
