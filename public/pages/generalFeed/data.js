@@ -80,7 +80,7 @@ export const editPost = (newText, postID) => {
     .doc(postID).update({ text: newText });
 };
 
-export const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
+export const deletePost = id => firebase.firestore().collection('posts').doc(id).delete();
 
 export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
   const ref = firebase.storage().ref('publishedImages-repository');
