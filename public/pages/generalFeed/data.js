@@ -80,15 +80,7 @@ export const editPost = (newText, postID) => {
     .doc(postID).update({ text: newText });
 };
 
-export const deletePost = (id) => {
-  firebase.firestore().collection('posts').doc(id).delete()
-    .then(() => {
-      console.log('Document successfully deleted!');
-    })
-    .catch((error) => {
-      console.error('Error removing document: ', error);
-    });
-};
+export const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
 
 export const sendImageToDatabase = (file, showUrlOfImagesToPubish) => {
   const ref = firebase.storage().ref('publishedImages-repository');
@@ -103,7 +95,6 @@ export const changeProfileImage = (file, callbackToSetNewImage) => {
   const ref = firebase.storage().ref('profileImages-repository');
   ref.child(file.name).put(file)
     .then((image) => {
-      console.log('enviei esse snapshot para o bd:', image.metadata.name);
       ref.child(file.name).getDownloadURL()
         .then((url) => {
           callbackToSetNewImage(url);

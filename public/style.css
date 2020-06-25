@@ -39,6 +39,11 @@ input {
   width: 100%;
 }
 
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent;
+}
+
 .box {
   padding: 50px;
   margin: 0px auto;
@@ -196,7 +201,6 @@ input {
 .post-area,
 .share-area textarea {
   padding: 10px;
-  margin: 10px 30px;
   border: 1px solid lightgrey;
   border-radius: 5px;
 }
@@ -210,7 +214,7 @@ input {
 .share-area textarea {
   margin: 0px;
   width: 100%;
-  height: 80px;
+  height: 120px;
   margin-bottom: 15px;
 }
 
@@ -235,12 +239,6 @@ input {
 .title-post-box,
 .post-area-text {
   padding: 5px 10px;
-}
-
-.footer-post-box {
-  padding: 3px 10px 0px 10px;
-  display: flex;
-  border-top: 1px solid lightgray;
 }
 
 .title-post-box {
@@ -269,12 +267,9 @@ input {
 }
 
 .post-area-icon {
-  height: 18px;
-  width: 18px;
-}
-
-.post-area-icon {
-  margin-right: 10px;
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
 }
 
 .post-area-icon:hover {
@@ -299,12 +294,78 @@ input {
   padding-bottom: 7px;
 }
 
+
+/*-------------------------------------*/
+
+
+/* Estilização dos comentários */
+
+.footer-post-box {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+}
+
+.footer-post-icons-box {
+  display: flex;
+  padding: 8px 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.footer-post-icons-items {
+  display: flex;
+  margin-right: 15px;
+}
+
+.comments-box {
+  text-align: left;
+  padding: 10px 10px;
+}
+
+.comments-box-textarea {
+  border-bottom: 1px solid lightgray;
+}
+
+#text-comment {
+  border: none;
+  padding: 10px 5px;
+  width: 100%;
+}
+
+#send-comment {
+  background-color: #49a562;
+  border: none;
+  color: white;
+  padding: 3px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-left: 82%;
+  width: 50px;
+}
+
+.comments-box-name {
+  margin-bottom: 7px;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.theme-image {
+  display: none;
+}
+
+
+/*-------------------------------------*/
+
 .transparency {
   opacity: 0;
 }
 
 .visibility {
   visibility: hidden;
+}
+
+.display-none {
+  display: none;
 }
 
 footer {
@@ -314,34 +375,8 @@ footer {
   padding-top: 20px;
 }
 
-@media only screen and (min-width: 1024px) {
-  .slogan-desktop {
-    display: block;
-  }
-  .box {
-    flex-direction: row;
-    height: 600px;
-  }
-  .box-item {
-    width: 50%;
-  }
-  .icon-large {
-    width: 60%;
-    height: 40%;
-  }
-  .login-area {
-    width: 55%;
-  }
-  .button-area {
-    width: 35%;
-  }
-}
 
-@media only screen and (min-width: 1440px) {
-  .box {
-    height: 716px;
-  }
-}
+/*-----------------Responsividade ---------------------*/
 
 @media only screen and (min-width: 700px) {
   .post-area-image {
@@ -412,157 +447,15 @@ footer {
     width: 70%;
     margin: 1% 15%;
   }
-  
-  .post-area-icon {
-    height: 18px;
-    width: 18px;
+  .theme-image {
+    display: block;
+    width: 100%;
+    height: 175px;
   }
-  
-  .post-area-icon {
-    margin-right: 10px;
-  }
-  
-  .post-area-icon:hover {
-    opacity: 0.6;
-  }
-  
-  .delete-btn {
-    border: none;
-    outline: none;
-    background-color: transparent;
-  }
-  
-  .post-area-icon-del:hover {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .save-btn-area 
-  .display-none {               
-    display: none;
-  }
+}
 
-  .save-btn-area {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 40px;
-    padding-bottom: 7px;
+@media only screen and (min-width: 1440px) {
+  .box {
+    height: 716px;
   }
-
-  .transparency {
-  opacity: 0; 
-  }
-  
-  .visibility {
-    visibility: hidden;
-  }
-
-  footer {
-    color: black;
-    text-align: center;
-    font-size: 14px;
-    padding-top: 20px;
-  }
-  /*Responsividade: versão laptop*/
-  /*Tela de login*/
-  
-  @media only screen and (min-width: 1024px) {
-    .slogan-desktop {
-      display: block;
-    }
-    .box {
-      flex-direction: row;
-      height: 600px;
-    }
-    .box-item {
-      width: 50%;
-    }
-    .icon-large {
-      width: 60%;
-      height: 40%;
-    }
-    .login-area {
-      width: 55%;
-    }
-    .button-area {
-      width: 35%;
-    }
-  }
-  
-  @media only screen and (min-width: 1440px) {
-    .box {
-      height: 716px;
-    }
-  }
-  /*Responsividade: versão laptop*/
-  /*Tela de login*/
-  
-  @media only screen and (min-width: 700px) {
-    .post-area-image {
-      width: 40%;
-      height: 60%;
-      margin: 1% 30%;
-    }
-  }
-  @media only screen and (min-width: 1024px) {
-    .profile-area {
-      flex-direction: column;
-      height: 285px;
-      border: 2px solid gray;
-      border-radius: 4px;
-      width: 40%;
-      margin-top: 10px;
-      padding: 0px;
-    }
-    .profile-area-theme {
-      background-color: lightgray;
-      width: 100%;
-      height: 50%;
-      margin-bottom: 10px;
-    }
-    .share-area,
-    .post-area {
-      height: fit-content;
-    }
-    .box-feed {
-      display: flex;
-      flex-direction: row;
-      width: 65%;
-      margin: auto;
-    }
-    .share-and-post {
-      width: 60%;
-    }
-    .profile-area-photo-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      padding-top: 0px;
-    }
-    .slogan-desktop {
-      display: block;
-    }
-    .box {
-      flex-direction: row;
-      height: 600px;
-    }
-    .box-item {
-      width: 50%;
-    }
-    .icon-large {
-      width: 60%;
-      height: 40%;
-    }
-    .login-area {
-      width: 55%;
-    }
-    .button-area {
-      width: 35%;
-    }
-    .post-area-image {
-      margin: 0px;
-      width: 70%;
-      margin: 1% 15%;
-    }
-  }
+}
