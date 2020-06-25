@@ -173,7 +173,7 @@ export const generalFeed = () => {
   <header>
     <nav class='navbar-page-feed'>
       <figure class='navbar-page-item-logo'>
-        <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
+        <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo"><span>Rainbow!</span>
       </figure>
       <div>
         <button class='circle signOut yellow'>
@@ -191,7 +191,6 @@ export const generalFeed = () => {
         </figure>
         <div class='name-profile-area'>
           <h3 id='name-user'></h3>
-          <h4>[Descrição]</h4>
         </div>
     </section>
       <div class='share-and-post'>
