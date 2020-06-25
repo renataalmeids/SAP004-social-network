@@ -172,11 +172,6 @@ export const generalFeed = () => {
   containerFeed.innerHTML = `
   <header>
     <nav class='navbar-page-feed'>
-      <div>
-        <button class='circle orange'>
-        <img class='icon-circle' src='../../assets/settings.png'>
-        </button>
-      </div>
       <figure class='navbar-page-item-logo'>
         <img class='icon-logo' src="../../assets/logo_small.jpg" alt="Logotipo">
       </figure>

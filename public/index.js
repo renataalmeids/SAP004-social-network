@@ -28,15 +28,9 @@ window.addEventListener('load', () => {
     case '#signup':
       signUp();
       break;
-      // case '#personalFeed':
-      //   personalFeed();
-      // break;
     case '#generalFeed':
       generalFeed();
       break;
-      // case '#configurations':
-      //   configurations();
-      //   break;
     default:
       home();
   }
