@@ -1,6 +1,6 @@
 # Rainbow
 
-Acesse a página clicando aqui [aqui](https://social-network-c1b66.firebaseapp.com/)
+Acesse a página clicando [aqui](https://social-network-c1b66.firebaseapp.com/)
 
 ## Índice
 
