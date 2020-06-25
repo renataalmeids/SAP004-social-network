@@ -7,8 +7,8 @@ Acesse a página clicando [aqui](https://social-network-c1b66.firebaseapp.com/)
 * [1. Prefácio](#1-prefácio)
 * [2. Planejamento do Projeto](#2-planejamento-do-projeto)
 * [3.Aprendizado](#3-aprendizado)
-* [4. Considerações gerais](#4-considerações-gerais)
-* [5. Entrega](#5-entrega)
+* [4. Tecnologias Utilizadas](#4-tecnologias-utilizadas)
+* [5. Autoria](#5-autoria)
 * [6. Guias, dicas e leituras
   complementares](#6-guias-dicas-e-leituras-complementares)
 
@@ -18,7 +18,7 @@ Acesse a página clicando [aqui](https://social-network-c1b66.firebaseapp.com/)
 
 A Rede Social "Rainbow" surgiu com a intenção de conectar pessoas LGBTQI+ num ambiente de descontração seguro.
 Nessa aplicação, quando logado, é possível que o usuário interaja com os demais por meio de publicação de fotos e texto, comentários e curtidas.
-Caso o usuário ainda não tenha uma conta, oferecemos a possibilidade de logar com o Google ou de se registrar à partir de algum outro e-mail.
+Caso o usuário ainda não tenha uma conta, oferecemos a possibilidade de logar com o Google ou de se registrar a partir de algum outro e-mail.
 
 ## 2. Planejamento do projeto
 
@@ -28,7 +28,7 @@ A nível de organização, o nosso projeto foi dividido por sprints e para guiar
 Como definição de pronto dessa primeira história, decidimos que o usuário poderia escolher entre criar uma conta definindo e-mail e senha ou logar com o Google.
 
 Caso escolha criar uma conta, na tela de registro o usuário pode definir o nome que irá aparecer no display, nas publicações e na interação por comentários.
-Ele deve inserir um e-mail e uma senha válidos, caso algum dos campos esteja inválido, a página exibe uma mensagem de erro e solicita que o usuário tenta novamente. Quando o cadastro do usuário é feito com sucesso, automaticamente ele é direcionado para a página de login. 
+Ele deve inserir um e-mail e uma senha válidos, caso algum dos campos esteja inválido, a página exibe uma mensagem de erro e solicita que o usuário tente novamente. Quando o cadastro do usuário é feito com sucesso, automaticamente ele é direcionado para a página de login. 
 
 Na página de login, se o usuário insere algum e-mail inválido ou digita uma senha errada, novamente a página exibe uma mensagem de erro para que ele tente novamente. Quando obtém sucesso tanto no login com o Google, quanto no login por e-mail e senha, o usuário é automaticamente direcionado para o Feed da rede social.
 
@@ -46,14 +46,14 @@ Além disso, o usuário também consegue alterar sua foto de perfil quando logad
 * Para ter um direcionamento da identidade visual da página, trabalhamos com protótipos de alta fidelidade.
 
 
-## Aprendizado
+## 3. Aprendizado
 
 * Manipulação da maior parte do layout da página em Flexbox - CSS
 * Uso de callbacks, consumo de Promises e uso de ES Modules - JS
 * Firebase Authentication, Firestore, onSnapshot, onAuthStateChanged e Firebase Hosting - Firebase
 * Colaboração por Git e GitHub.
 
-### Tecnologias Utilizadas
+## 4. Tecnologias Utilizadas
 
 * HTML
 * CSS
