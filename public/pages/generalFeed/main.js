@@ -10,9 +10,8 @@ import {
   commentPosts,
 } from './data.js';
 
+
 // Funções auxiliares chamadas na criação do template da página (function generalFeed())
-
-
 const setLogOutOnButton = () => {
   document.querySelector('.signOut').addEventListener('click', (event) => {
     event.preventDefault();
@@ -75,7 +74,6 @@ const getUpLoadImgClick = () => document.querySelector('#publish-img-btn').addEv
 // Funções auxiliares chamadas na criação dos posts individuais (loadPostTemplate)
 const getValuesFromEditedPost = (listener, newText, postID) => listener.addEventListener('click', () => {
   editPost(newText.value, postID.value);
-
 });
 
 const setEditPostClick = (element) => {
@@ -161,7 +159,6 @@ const loadPostTemplate = (postList) => {
     postBox.classList.add('post-area');
     document.querySelector('#post-area').appendChild(postBox);
 
-    // Chamada das funções
     visibilityOfElementsToCurrentUser(postBox, user);
     deleteEvent(postBox, code);
     setEditPostClick(postBox);
@@ -222,7 +219,6 @@ export const generalFeed = () => {
   `;
   document.querySelector('#root').appendChild(containerFeed);
 
-  // Chamada das funções
   setLogOutOnButton();
   setUserData();
   sendNewProfileImg(setNewProfileImg);
