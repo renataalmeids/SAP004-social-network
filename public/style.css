@@ -160,6 +160,7 @@ textarea {
   border-radius: 0px;
   width: 28px;
   height: 28px;
+  margin-right: 5px;
 }
 
 .icon-circle {
@@ -297,9 +298,6 @@ textarea {
 
 /*-------------------------------------*/
 
-
-/* Estilização dos comentários */
-
 .footer-post-box {
   display: flex;
   flex-direction: column;
@@ -366,13 +364,6 @@ textarea {
 
 .display-none {
   display: none;
-}
-
-footer {
-  color: black;
-  text-align: center;
-  font-size: 14px;
-  padding-top: 20px;
 }
 
 
